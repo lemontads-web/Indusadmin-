@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useCartStore } from '../../store/useCartStore';
 import { ClipboardList, Menu, X, ChevronDown } from 'lucide-react';
 import productsData from '../../data/products.json';
-import redLogo from '../../assets/red.jpeg';
+import finalLogo from '../../assets/Final logo.png';
 
 const categories = [...new Set(productsData.map((product) => product.categoryLabel))];
 const categoryToSlug = (category) => category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -19,14 +19,14 @@ const Navbar = () => {
       {/* Top accent line */}
       <div className="h-[3px] bg-accent w-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] md:h-20 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-[72px] md:h-20 flex items-center justify-between gap-4">
 
         {/* Logo */}
         <Link to="/" className="flex items-center min-w-0 group py-1" onClick={() => setMobileOpen(false)}>
           <img
-            src={redLogo}
-            alt="Indus Heaters"
-            className="h-9 sm:h-11 md:h-12 w-auto object-contain max-w-[200px] sm:max-w-[260px] opacity-100"
+            src={finalLogo}
+            alt="Indus Heaters – Built For Heat, Built To Last"
+            className="h-9 sm:h-11 md:h-14 w-auto object-contain max-w-[180px] sm:max-w-[240px]"
           />
         </Link>
 

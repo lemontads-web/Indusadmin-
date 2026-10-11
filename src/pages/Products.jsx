@@ -36,11 +36,11 @@ export default function Products() {
       {/* ── CATALOGUE HEADER ──────────────────── */}
       <div className="border-b border-muted/15 bg-white relative overflow-hidden">
         
-        <div className="max-w-7xl mx-auto px-6 py-12 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="structural-line-left pl-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-12 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="structural-line-left pl-4">
             <SectionHeading
               label="System Catalogue v2.0"
-              title={<>PRODUCT<br />INVENTORY</>}
+              title={<>PRODUCT<br /><span className="text-accent">INVENTORY</span></>}
               subtitle="Access 500+ precision heating configurations. Use the sidebar module to filter by category or technical specification."
               theme="on-white"
               className="mb-0"
@@ -65,7 +65,7 @@ export default function Products() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col lg:flex-row gap-0">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10 flex flex-col lg:flex-row gap-0">
 
         {/* ── SIDEBAR CONTROL MODULE ───────────── */}
         <aside className="lg:w-64 shrink-0 lg:border-r border-muted/15 lg:pr-10 lg:mr-10">

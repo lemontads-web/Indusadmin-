@@ -11,7 +11,7 @@ export default function SectionHeading({
 
   const labelColor = theme === 'on-white' ? 'text-accent' : 'text-white';
   const labelBarColor = theme === 'on-white' ? 'bg-accent' : 'bg-white';
-  const titleColor = theme === 'on-white' ? 'text-accent' : 'text-white';
+  const titleColor = theme === 'on-white' ? 'text-primary' : 'text-white';
   const subtitleColor = theme === 'on-white' ? 'text-primary' : 'text-white/90';
 
   return (

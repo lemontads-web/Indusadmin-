@@ -57,7 +57,7 @@ export default function ProductDetail() {
 
       {/* ── BREADCRUMB SYSTEM ─────────────────── */}
       <div className="border-b border-muted/15 bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-3 text-[10px] font-heading font-light uppercase tracking-widest text-primary">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-4 flex items-center gap-3 text-[10px] font-heading font-light uppercase tracking-widest text-primary">
           <Link to="/" className="hover:text-accent transition-colors">Home</Link>
           <ChevronRight className="w-3 h-3 opacity-40" />
           <Link to="/products" className="hover:text-accent transition-colors">Catalogue</Link>
@@ -69,7 +69,7 @@ export default function ProductDetail() {
       </div>
 
       {/* ── MAIN SYSTEM VIEW ──────────────────── */}
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col border-b border-muted/15">
 
           {/* TOP: Image Panel */}
@@ -306,7 +306,7 @@ export default function ProductDetail() {
         {/* ── RELATED MODULES ───────────────────── */}
         {related.length > 0 && (
           <div className="py-16">
-            <SectionHeading title="RELATED PRODUCTS" theme="on-white" />
+            <SectionHeading title={<>RELATED <span className="text-accent">PRODUCTS</span></>} theme="on-white" />
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border border-muted/15">
               {related.map((rel, i) => (
                 <Link
@@ -316,7 +316,7 @@ export default function ProductDetail() {
                 >
                   <img src={rel.images[0]} alt={rel.name} className="w-24 h-24 object-contain mb-6 group-hover:scale-105 transition-transform duration-300" />
                   <div className="text-[9px] text-accent font-heading font-light uppercase tracking-[0.3em] mb-2">{rel.categoryLabel}</div>
-                  <div className="font-heading text-lg font-light text-accent group-hover:text-accent transition-colors">{rel.name}</div>
+                  <div className="font-heading text-lg font-light text-primary group-hover:text-accent transition-colors">{rel.name}</div>
                   <div className="mt-3 opacity-0 group-hover:opacity-100 font-heading text-[9px] text-accent tracking-widest transition-opacity uppercase font-light">View Specs →</div>
                 </Link>
               ))}

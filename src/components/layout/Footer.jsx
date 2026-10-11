@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Mail } from 'lucide-react';
 import productsData from '../../data/products.json';
-import redLogo from '../../assets/red.jpeg';
+import finalLogo from '../../assets/Final logo.png';
 
 const footerCategories = [...new Set(productsData.map((product) => product.categoryLabel))];
 const categoryToSlug = (category) => category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -11,12 +11,12 @@ const Footer = () => {
     <footer className="bg-white text-primary border-t-4 border-accent font-heading font-light">
 
       {/* Main Footer Grid */}
-      <div className="max-w-7xl mx-auto px-6 pt-16 pb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-muted/15">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 pb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-muted/15">
 
         {/* Brand */}
         <div>
           <div className="mb-5">
-            <img src={redLogo} alt="Indus Heaters" className="h-12 w-auto object-contain" />
+            <img src={finalLogo} alt="Indus Heaters" className="h-12 w-auto object-contain" />
           </div>
           <p className="text-primary text-sm leading-[1.25] mb-5 font-normal">
             India's leading industrial heater manufacturer since 2002. Precision engineering for plastic, polymer and rubber industries.
@@ -77,7 +77,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
         <p className="text-xs text-primary/70">© {new Date().getFullYear()} Indus Heaters. All rights reserved.</p>
         <div className="flex gap-6 text-xs text-primary/70">
           <Link to="#" className="hover:text-accent transition-colors">Privacy Policy</Link>

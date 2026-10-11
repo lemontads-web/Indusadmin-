@@ -81,11 +81,11 @@ export default function Enquiry() {
   return (
     <div className="bg-white text-primary font-heading font-light">
       <div className="bg-white border-b border-muted/15">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="structural-line-left pl-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
+          <div className="structural-line-left pl-4">
             <SectionHeading
               label="Order Overview"
-              title="SEND ENQUIRY"
+              title={<>SEND <span className="text-accent">ENQUIRY</span></>}
               subtitle="Share your buyer details and delivery address. Your selected cart items will be included in the enquiry email."
               theme="on-white"
               className="mb-0"
@@ -95,7 +95,7 @@ export default function Enquiry() {
       </div>
 
       {items.length === 0 ? (
-        <div className="max-w-7xl mx-auto px-6 py-24 flex flex-col items-center justify-center text-center border-b border-muted/15 bg-white">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-24 flex flex-col items-center justify-center text-center border-b border-muted/15 bg-white">
           <div className="w-20 h-20 bg-muted/10 flex items-center justify-center mb-6">
             <ShoppingBag className="w-10 h-10 text-primary" />
           </div>
@@ -106,7 +106,7 @@ export default function Enquiry() {
           </Link>
         </div>
       ) : (
-        <div className="max-w-7xl mx-auto px-6 py-10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 border border-muted/15 shadow-sm">
             <div className="lg:col-span-2 border-b lg:border-b-0 lg:border-r border-muted/15 bg-white">
               <div className="flex items-center justify-between px-8 py-5 bg-accent text-white border-b-2 border-accent">

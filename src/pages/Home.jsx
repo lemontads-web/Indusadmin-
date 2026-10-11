@@ -4,14 +4,15 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import ourApproachImg from '../assets/products/5.png';
-import redLogo from '../assets/red.jpeg';
+
+
 import SectionHeading from '../components/SectionHeading';
 import StatsBar from '../components/StatsBar';
 import HeroButton from '../components/HeroButton';
 
-const heroImageModules = import.meta.glob('/src/assets/products/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' });
+const heroImageModules = import.meta.glob('/src/image-animation/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' });
 const heroImages = Object.entries(heroImageModules)
-  .filter(([path]) => !path.includes('pvt'))
+  .sort(([a], [b]) => a.localeCompare(b))
   .map(([, img]) => img);
 
 const categories = [
@@ -68,18 +69,17 @@ export default function Home() {
 
       {/* ── HERO ─────────────────────────────────────── */}
       <section className="relative min-h-[calc(100vh-75px)] md:min-h-[520px] lg:min-h-[600px] flex items-stretch border-b border-muted/15 overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-stretch justify-between relative z-10 md:py-0">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full flex flex-col md:flex-row items-stretch justify-between relative z-10 md:py-0">
           
           {/* Mobile: Top (order-1), Desktop: Right Panel — flush to top, no gap */}
-          <div className="order-1 md:order-2 w-full md:w-1/2 md:absolute md:top-0 md:bottom-0 md:right-0 h-64 sm:h-80 md:h-full relative overflow-hidden bg-muted/5">
+          <div className="order-1 md:order-2 w-full md:w-1/2 md:absolute md:top-0 md:bottom-0 md:right-0 h-64 sm:h-80 md:h-full relative overflow-hidden bg-white">
             {heroImages.map((imgSrc, idx) => (
               <img
                 key={imgSrc}
                 src={imgSrc}
                 alt={`Indus Heaters product asset ${idx + 1}`}
                 loading={idx === 0 ? 'eager' : 'lazy'}
-                style={{ objectPosition: '85% center' }}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 ease-in-out ${
                   idx === currentHeroIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                 }`}
               />
@@ -93,12 +93,21 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* BUILT FOR / BUILT TO in grey, HEAT / LAST in red accent */}
-            <h1 className="font-heading font-light text-5xl sm:text-7xl lg:text-8xl mb-6 sm:mb-8 tracking-tight leading-[1.25]">
-              <span className="text-primary">BUILT FOR</span><br />
-              <span className="text-accent">HEAT.</span><br />
-              <span className="text-primary">BUILT TO</span><br />
-              <span className="text-accent">LAST.</span>
+            {/* Headline: line-height 1.25 only — no block wrappers, no extra gaps */}
+            <h1 className="font-heading font-light mb-6 sm:mb-8 tracking-tight" style={{ lineHeight: 1.25 }}>
+              {/* Mobile: 2 lines, fluid clamp font */}
+              <span className="md:hidden" style={{ fontSize: 'clamp(1.25rem, 5.6vw, 1.75rem)' }}>
+                <span className="text-primary">BUILT FOR </span><span className="text-accent">HEAT.</span>
+                <br />
+                <span className="text-primary">BUILT TO </span><span className="text-accent">LAST.</span>
+              </span>
+              {/* Desktop: 4 lines */}
+              <span className="hidden md:inline text-5xl sm:text-7xl lg:text-8xl">
+                <span className="text-primary">BUILT FOR</span><br />
+                <span className="text-accent">HEAT.</span><br />
+                <span className="text-primary">BUILT TO</span><br />
+                <span className="text-accent">LAST.</span>
+              </span>
             </h1>
 
             {/* Color Mix: Grey Paragraph on White */}
@@ -122,10 +131,10 @@ export default function Home() {
 
 
       {/* ── PRODUCT CATEGORIES ────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
+      <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20">
         <SectionHeading
           label="Product Range"
-          title={<>PRECISION<br />HEATING RANGE</>}
+          title={<><span className="text-accent">PRECISION</span><br />HEATING RANGE</>}
           theme="on-white"
           action={
             <Link to="/products" className="flex items-center gap-3 text-xs font-heading font-light uppercase tracking-[0.2em] text-primary hover:text-accent transition-all group">
@@ -184,7 +193,7 @@ export default function Home() {
 
       {/* ── ABOUT STRUCTURAL ─────────────────────────── */}
       <section className="border-b border-muted/15 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 items-center">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 items-center">
 
           {/* Mobile: Top (order-1), Desktop: Right (lg:order-2 lg:col-span-7) */}
           <div className="order-1 lg:order-2 lg:col-span-7 w-full bg-white relative overflow-hidden group h-64 sm:h-80 lg:h-[480px]">
@@ -196,10 +205,10 @@ export default function Home() {
           </div>
 
           {/* Mobile: Bottom (order-2), Desktop: Left (lg:order-1 lg:col-span-5) */}
-          <div className="order-2 lg:order-1 lg:col-span-5 py-12 lg:py-16 pr-0 lg:pr-10 border-r border-muted/15 structural-line-left pl-6 lg:pl-10">
+          <div className="order-2 lg:order-1 lg:col-span-5 py-12 lg:py-16 pr-0 lg:pr-10 border-r border-muted/15 structural-line-left pl-4">
             <SectionHeading
               label="Our Approach"
-              title={<>PRECISION.<br />EXPERIENCE.<br />UNWAVERING TRUST.</>}
+              title={<><span className="text-accent">PRECISION.</span><br />EXPERIENCE.<br />UNWAVERING TRUST.</>}
               theme="on-white"
             />
             {/* Color Mix: Grey Paragraph on White */}
@@ -219,10 +228,10 @@ export default function Home() {
 
 
       {/* ── INDUSTRIES TECHNICAL ───────────────────────── */}
-      <section className="max-w-7xl mx-auto px-6 py-16 sm:py-20 border-b border-muted/15">
+      <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 border-b border-muted/15">
         <SectionHeading
           label="Industries"
-          title="INDUSTRIES WE SERVE"
+          title={<>INDUSTRIES WE <span className="text-accent">SERVE</span></>}
           theme="on-white"
         />
         {/* Soft 15% opacity border */}
@@ -232,7 +241,7 @@ export default function Home() {
               key={i}
               tabIndex={0}
               role="button"
-              className="group px-6 py-5 font-heading text-[12px] font-light uppercase tracking-widest text-primary border-b border-r border-muted/15 transition-all duration-200 ease-in-out cursor-pointer flex justify-between items-center select-none hover:bg-accent hover:text-white hover:border-accent hover:-translate-y-[2px] hover:shadow-md hover:shadow-accent/25 focus-visible:bg-accent focus-visible:text-white focus-visible:border-accent focus-visible:-translate-y-[2px] focus-visible:shadow-md focus-visible:shadow-accent/25 active:bg-accent active:text-white active:border-accent active:-translate-y-[2px] active:shadow-md active:shadow-accent/25"
+              className="group px-6 py-5 font-heading text-[15px] font-light uppercase tracking-widest text-primary border-b border-r border-muted/15 transition-all duration-200 ease-in-out cursor-pointer flex justify-between items-center select-none hover:bg-accent hover:text-white hover:border-accent hover:-translate-y-[2px] hover:shadow-md hover:shadow-accent/25 focus-visible:bg-accent focus-visible:text-white focus-visible:border-accent focus-visible:-translate-y-[2px] focus-visible:shadow-md focus-visible:shadow-accent/25 active:bg-accent active:text-white active:border-accent active:-translate-y-[2px] active:shadow-md active:shadow-accent/25"
             >
               <span className="pr-2 transition-colors duration-200">{ind}</span>
               <span className="text-[10px] text-muted group-hover:text-white group-focus-visible:text-white group-active:text-white font-light shrink-0 transition-colors duration-200">
@@ -246,7 +255,7 @@ export default function Home() {
 
       {/* ── CTA BANNER (ACCENT RED BACKGROUND) ───── */}
       <section className="bg-accent text-white py-16 sm:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
           <div>
             <div className="w-12 h-[2px] bg-white mb-6" />
             <h2 className="font-heading text-4xl sm:text-5xl font-light text-white leading-[1.25] tracking-tight mb-6 uppercase">

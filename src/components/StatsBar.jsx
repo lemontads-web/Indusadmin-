@@ -43,7 +43,7 @@ const statsData = [
 export default function StatsBar() {
   return (
     <section className="bg-accent text-white py-10 sm:py-12 lg:py-14 w-full">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
           {statsData.map((stat, i) => (
             <motion.div

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
-import redLogo from '../assets/red.jpeg';
+import finalLogo from '../assets/Final logo.png';
 
 const locations = [
   { city: 'Chennai — Headquarters', address: '123 Industrial Estate, Ambattur, Chennai 600058, Tamil Nadu', phone: '+91 44 0000 0000', email: 'info@indusheaters.com' },
@@ -23,10 +23,10 @@ export default function Contact() {
 
       {/* Page Header */}
       <div className="bg-white border-b border-muted/15">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
           <SectionHeading
             label="Get In Touch"
-            title="CONTACT US"
+            title={<>CONTACT <span className="text-accent">US</span></>}
             subtitle="Reach out with product questions, custom requirements, or general enquiries. Our team responds within 24 business hours."
             theme="on-white"
             className="mb-0"
@@ -34,7 +34,7 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 border border-muted/15">
 
           {/* ── CONTACT FORM (3/5) ── */}
@@ -139,7 +139,7 @@ export default function Contact() {
 
         {/* Brand closing logo */}
         <div className="mt-12 flex flex-col items-center gap-4 py-10 border-t border-muted/15">
-          <img src={redLogo} alt="Indus Heaters" className="h-14 w-auto object-contain opacity-90" />
+          <img src={finalLogo} alt="Indus Heaters" className="h-14 w-auto object-contain opacity-90" />
           <p className="text-xs font-heading font-light uppercase tracking-[0.3em] text-primary/60">Built For Heat. Built To Last.</p>
         </div>
       </div>
