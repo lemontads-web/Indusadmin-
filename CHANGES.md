@@ -1,5 +1,25 @@
 # Changes Document
 
+## Session Summary: Admin Panel Phase 4 + Accessibility / Usability Redesign
+
+**Admin panel (`/admin`)** — separate download, hidden from Google:
+- Sign in (show/hide password, "Forgot your password?" email link, reset page), staff-only guard by role.
+- Home: three big task buttons, counts with plain explanations, "Needs your attention", recent changes, "How it works".
+- Products: search, category filter, status filter buttons with counts, labelled actions (Edit, View on website, Duplicate, Move to Trash with Undo).
+- Product form: "Who can see this product?" first, then 8 numbered steps; auto web address with "Change"; photo upload (resize to 1600 px, duplicate photos reused), reorder, main photo, descriptions; specs table; features/applications; search words; related products; optional Google text; error summary that links to each problem; warning before leaving with unsaved changes; save bar ("Save draft" / "Publish to website" / "Save changes").
+- Categories: add/edit inline, reorder, tile photo, delete safely (moves products first), Undo.
+- Trash: restore, owner-only "Delete forever" with confirmation.
+- Database: `save_product` saves details, photos and related products in one all-or-nothing step (10 new checks; 52 total).
+- Public site always reads as a visitor, so drafts never show even when signed in.
+
+**Audit fixes (WCAG 2.1 AA, design critique, UX copy):**
+- Readable admin type: Gilroy Regular/Medium, normal capitals, 16 px base, 1.5 line height (public site unchanged).
+- Tap targets: 192 under 44 px → 0 on the form/categories; inputs 16 px (no phone zoom).
+- Contrast: secondary text #666 (5.7:1), field borders #8a8a8a (3.4:1).
+- Words on buttons, one status wording (On website / Draft / Hidden), phone bottom tab bar, skip link, per-page tab titles, labelled fields linked to hints/errors.
+- Phone product form: visibility moved from ~3,900 px to ~350 px; photo section 2,060 → 970 px.
+- Dev-only design preview (`/admin/login?design-preview=1`, read-only, removed from production builds).
+
 ## Session Summary: Admin Panel Phase 3 — Website Reads Live Data
 
 - **Live catalogue** (`src/data/catalogueApi.js`, `CatalogueProvider.jsx`, `catalogueContext.js`): one request set loads categories, products, photos, related links, live banners and public settings from Supabase. Pages (Home, Products, Product detail, Navbar, Footer) read it through `useCatalogue()`.

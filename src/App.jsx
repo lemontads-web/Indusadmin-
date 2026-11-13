@@ -11,6 +11,8 @@ const Enquiry = lazy(() => import('./pages/Enquiry'));
 const EnquirySuccess = lazy(() => import('./pages/EnquirySuccess'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
+// Admin panel: separate download, only fetched when someone opens /admin
+const AdminApp = lazy(() => import('./admin/AdminApp'));
 
 const Loader = () => (
   <div className="min-h-screen flex items-center justify-center bg-white">
@@ -27,6 +29,9 @@ function App() {
     <CatalogueProvider>
     <Router>
       <ScrollToTop />
+      <Routes>
+        <Route path="/admin/*" element={<Suspense fallback={<Loader />}><AdminApp /></Suspense>} />
+        <Route path="*" element={
       <MainLayout>
         <Suspense fallback={<Loader />}>
           <Routes>
@@ -47,6 +52,8 @@ function App() {
           </Routes>
         </Suspense>
       </MainLayout>
+        } />
+      </Routes>
     </Router>
     </CatalogueProvider>
   );

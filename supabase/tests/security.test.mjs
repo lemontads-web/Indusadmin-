@@ -126,6 +126,34 @@ await as(OWNER, 'authenticated', () => expectError('cannot remove the last owner
 await as(EDITOR, 'authenticated', () => q(`update admin_users set role='owner' where user_id='${EDITOR}'`).then(async () =>
   ok('editor cannot promote themselves', (await db.query(`select role from admin_users where user_id='${EDITOR}'`)).rows[0].role === 'editor')));
 
+// ── save_product (admin panel) ──
+const catId = (await q(`select id from categories where slug='coil-heaters'`))[0].id;
+const mediaA = (await q(`select id from media where path='p/a.jpg'`))[0].id;
+const spring = (await q(`select id from products where slug='spring-coil-heaters'`))[0].id;
+await db.exec(`insert into media (path, content_hash) values ('p/c.jpg','hashC')`);
+const mediaC = (await q(`select id from media where path='p/c.jpg'`))[0].id;
+const payload1 = (extra = {}) => JSON.stringify({ slug: 'compact-coil', name: 'Compact Coil', category_id: catId, status: 'published',
+  specs: [{ label: 'Temp', value: '450°C' }], features: ['Fast'], keywords: ['mini coil'],
+  images: [{ media_id: mediaC, alt_text: 'main' }, { media_id: mediaA }], related: [spring, spring], ...extra }).replace(/'/g, "''");
+let newId;
+await as(EDITOR, 'authenticated', async () => {
+  newId = (await q(`select save_product('${payload1()}'::jsonb) id`))[0].id;
+  const imgs = await q(`select media_id, sort_order from product_images where product_id='${newId}' order by sort_order`);
+  ok('save_product creates product with photos in order', imgs.length === 2 && imgs[0].media_id === mediaC);
+  ok('save_product stores lists and specs', (await q(`select features[1] f, specs->0->>'value' v from products where id='${newId}'`))[0].v === '450°C');
+  ok('save_product removes repeated related products', (await q(`select count(*)::int c from product_related where product_id='${newId}'`))[0].c === 1);
+  await q(`select save_product('${payload1({ id: newId, name: 'Compact Coil v2', images: [{ media_id: mediaA }] })}'::jsonb)`);
+  const after = await q(`select name, (select count(*)::int from product_images where product_id=p.id) n from products p where id='${newId}'`);
+  ok('save_product updates and replaces photos', after[0].name === 'Compact Coil v2' && after[0].n === 1);
+});
+await as(EDITOR, 'authenticated', () => expectError('save_product is all-or-nothing (bad photo → nothing saved)',
+  `select save_product('${payload1({ id: newId, name: 'Should not save', images: [{ media_id: '00000000-0000-0000-0000-000000000999' }] })}'::jsonb)`, 'foreign key'));
+ok('…and the product kept its previous name and photo', (await q(`select name, (select count(*)::int from product_images where product_id=p.id) n from products p where id='${newId}'`))
+  .every((r) => r.name === 'Compact Coil v2' && r.n === 1));
+await as(EDITOR, 'authenticated', () => expectError('save_product rejects duplicate web address', `select save_product('${payload1({ name: 'Copy' })}'::jsonb)`, 'duplicate key'));
+await as(SALES, 'authenticated', () => expectError('sales cannot save products', `select save_product('${payload1({ slug: 'x-y' })}'::jsonb)`, 'permission'));
+await as(null, 'anon', () => expectError('visitors cannot call save_product', `select save_product('${payload1({ slug: 'x-z' })}'::jsonb)`, 'permission denied'));
+
 // ── Storage ──
 await as(null, 'anon', () => db.exec(`insert into storage.objects (bucket_id, name) values ('enquiry-attachments','incoming/abc/drawing.pdf')`))
   .then(() => ok('visitor can upload to incoming/', true)).catch((e) => ok('visitor can upload to incoming/', false, e.message));

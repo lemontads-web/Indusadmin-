@@ -210,7 +210,7 @@ Settings screen will hold: the WhatsApp business number shown to customers (+91 
 | 1. Backend setup ✅ **done (13 Nov 2026)** | Live Supabase project `znajahlcdqxiwzffrcmu` (Seoul): schema, roles, row-level security, storage, hardening applied; Owner login set up; `npm run check:supabase` all ✔. To do: switch off public sign-ups. | 2–3 days |
 | 2. Migration ✅ **done (13 Nov 2026)** | 37 products, 9 categories, 64 photos, 63 photo links, 93 related links imported (`npm run import:supabase`); `npm run verify:supabase` confirms Supabase matches the site exactly. | 1–2 days |
 | 3. Public site on live data ✅ **done (13 Nov 2026)** | Site reads categories, products, photos, related links, banners and WhatsApp number from Supabase; shows built-in data instantly and if Supabase is unreachable; top strip + Home hero offer slide. | 2–3 days |
-| 4. Admin: auth + products + categories | Login, lists, forms, image uploader, trash | 5–7 days |
+| 4. Admin: auth + products + categories ✅ **built (13 Nov 2026)** | Sign in, Home, products, product form with photos, categories, Trash; accessibility redesign. Signed-in saving still to be tested with the owner login. | 5–7 days |
 | 5. Admin: banners & offers | Scheduling, placements, preview, festival templates | 3–4 days |
 | 6. Media library + duplicate finder | | 2 days |
 | 7. Enquiries inbox + WhatsApp | Inbox, statuses, export; WhatsApp buttons for customers and replies; email alert, then automatic WhatsApp alert once Meta approves | 4–5 days (+ Meta approval wait) |
