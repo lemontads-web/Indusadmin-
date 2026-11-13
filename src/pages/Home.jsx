@@ -8,6 +8,7 @@ import ourApproachImg from '../assets/products/5.png';
 
 import SectionHeading from '../components/SectionHeading';
 import { useCatalogue } from '../data/catalogueContext';
+import categoryPlaceholder from '../assets/Final logo.png';
 import StatsBar from '../components/StatsBar';
 import HeroButton from '../components/HeroButton';
 import HeroBannerSlide from '../components/HeroBannerSlide';
@@ -41,7 +42,9 @@ const industries = [
 ];
 
 export default function Home() {
-  const { categories, banners } = useCatalogue();
+  const { categories: allCategories, products, banners } = useCatalogue();
+  // Only categories that have products (an empty one would lead to an empty list)
+  const categories = allCategories.filter((c) => products.some((p) => p.category === c.slug));
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
   // Live offer/festival banners lead the slideshow, then the product photos
@@ -165,12 +168,17 @@ export default function Home() {
               <Link to={`/products?category=${cat.slug}`} className="block h-full flex flex-col justify-between">
                 {/* Image area */}
                 <div className="aspect-[4/3] w-full bg-white overflow-hidden relative border-b border-muted/15 flex items-center justify-center p-5">
-                  <img
-                    src={cat.image}
-                    alt={cat.label}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
+                  {cat.image ? (
+                    <img
+                      src={cat.image}
+                      alt={cat.label}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  ) : (
+                    // No photo chosen yet in the admin panel: show the logo instead of an empty frame
+                    <img src={categoryPlaceholder} alt="" className="w-1/2 h-auto object-contain opacity-60" loading="lazy" />
+                  )}
                 </div>
                 {/* Text area: Single Category Title in #515151 grey + description & red action link */}
                 <div className="p-5 bg-white flex-1 flex flex-col justify-between">

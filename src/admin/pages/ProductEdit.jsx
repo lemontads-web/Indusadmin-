@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Save, Globe, AlertTriangle } from 'lucide-react';
 import { useAdminAuth } from '../authContext';
 import { getProduct, listCategories, listProducts, saveProduct, slugify, uniqueProductSlug, friendlyError } from '../lib/api';
@@ -38,6 +38,7 @@ function StatusChooser({ value, onChange }) {
 
 export default function ProductEdit() {
   const { id } = useParams();
+  const location = useLocation();
   const isNew = !id;
   const navigate = useNavigate();
   const { user } = useAdminAuth();
@@ -51,7 +52,7 @@ export default function ProductEdit() {
   const [error, setError] = useState('');
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
-  const [toast, setToast] = useState(null);
+  const [toast, setToast] = useState(location.state?.toast || null);
   const summaryRef = useRef(null);
   const closeToast = useCallback(() => setToast(null), []);
 
@@ -76,6 +77,7 @@ export default function ProductEdit() {
     const onClick = (e) => {
       const a = e.target.closest?.('a[href]');
       if (!a || a.target === '_blank' || a.origin !== window.location.origin) return;
+      if (a.getAttribute('href')?.startsWith('#') || a.pathname === window.location.pathname) return; // stays on this page
       if (!window.confirm(LEAVE_MESSAGE)) { e.preventDefault(); e.stopPropagation(); }
     };
     window.addEventListener('beforeunload', beforeUnload);
@@ -117,10 +119,17 @@ export default function ProductEdit() {
       const savedCopy = { ...next, id: newId };
       setSaved(savedCopy);
       setForm((f) => ({ ...f, status: next.status, id: newId }));
-      setToast({ text: next.status === 'published' ? 'Saved. It’s on the website now.' : `Saved as ${STATUS[next.status].label.toLowerCase()} — not on the website.` });
-      if (isNew) navigate(`/admin/products/${newId}`, { replace: true });
+      const message = { text: next.status === 'published' ? 'Saved. It’s on the website now.' : `Saved as ${STATUS[next.status].label.toLowerCase()} — not on the website.` };
+      setSlugTouched(true); // from now on, renaming never changes the web address by itself
+      if (isNew) navigate(`/admin/products/${newId}`, { replace: true, state: { toast: message } });
+      else setToast(message);
     } catch (e) {
-      setError(friendlyError(e));
+      if (e?.code === '23505' && /slug/i.test(e?.message || '')) {
+        setEditingSlug(true);
+        setErrors({ slug: { text: 'Another product already uses this web address. Change the last part of the address, or press “Make unique”.', target: 'f-slug' } });
+      } else {
+        setError(friendlyError(e));
+      }
       setTimeout(() => summaryRef.current?.focus(), 0);
     } finally {
       setSaving(false);
@@ -206,9 +215,7 @@ export default function ProductEdit() {
                     hint="Small letters, numbers and dashes only, e.g. spring-coil-heaters.">
                     <div className="flex gap-2">
                       <Input id="f-slug" value={form.slug} onChange={(e) => { setSlugTouched(true); set('slug', slugify(e.target.value)); }} />
-                      {isNew && (
-                        <Button variant="secondary" onClick={async () => set('slug', await uniqueProductSlug(form.name || form.slug))}>Make unique</Button>
-                      )}
+                      <Button variant="secondary" onClick={async () => { set('slug', await uniqueProductSlug(form.slug || form.name, form.id)); setErrors((current) => { const rest = { ...current }; delete rest.slug; return rest; }); }}>Make unique</Button>
                     </div>
                   </Field>
                   {!isNew && (

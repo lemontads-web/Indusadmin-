@@ -39,6 +39,8 @@ export function ListEditor({ value, onChange, placeholder = 'Type here', chips =
                 value={v}
                 aria-label={`${label} ${i + 1}`}
                 onChange={(e) => onChange(value.map((x, j) => (j === i ? e.target.value : x)))}
+                // An emptied line removes itself instead of becoming an empty bullet on the website
+                onBlur={() => { if (!v.trim()) onChange(value.filter((_, j) => j !== i)); }}
               />
               <IconButton label="Move up" icon={<ArrowUp className="w-4 h-4" />} disabled={i === 0} onClick={() => onChange(move(value, i, i - 1))} />
               <IconButton label="Move down" icon={<ArrowDown className="w-4 h-4" />} disabled={i === value.length - 1} onClick={() => onChange(move(value, i, i + 1))} />
@@ -57,13 +59,15 @@ export function ListEditor({ value, onChange, placeholder = 'Type here', chips =
             placeholder={placeholder}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); add(); } }}
+            // Text typed but not added yet is added when you leave the box, so it isn't lost on Save
+            onBlur={() => { if (draft.trim()) add(); }}
           />
           <button type="button" onClick={add} disabled={!draft.trim()}
             className="inline-flex items-center gap-1.5 min-h-11 px-4 border border-[#8a8a8a] text-[15px] hover:border-accent hover:text-accent disabled:opacity-40 shrink-0">
             <Plus className="w-4 h-4" aria-hidden="true" /> Add
           </button>
         </div>
-        <p className={`mt-1.5 text-[13px] ${MUTED}`}>{chips ? 'Tip: add several at once by separating them with commas.' : 'Press Enter or “Add” after each one.'}</p>
+        <p className={`mt-1.5 text-[13px] ${MUTED}`}>{chips ? 'Tip: add several at once by separating them with commas.' : 'Press Enter or “Add” after each one — or just move on, it’s added automatically.'}</p>
       </div>
     </div>
   );

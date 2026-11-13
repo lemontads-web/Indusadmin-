@@ -104,7 +104,7 @@ export const deleteCategoryForever = async (id) => must(await db().from('categor
 // ── Products ──────────────────────────────────────────────────────
 export async function listProducts({ trashed = false } = {}) {
   let query = db().from('products')
-    .select('id, slug, name, status, sort_order, updated_at, deleted_at, category:categories(id, slug, name), images:product_images(sort_order, media(path))')
+    .select('id, slug, name, status, keywords, sort_order, updated_at, deleted_at, category:categories(id, slug, name), images:product_images(sort_order, media(path))')
     .order('sort_order');
   query = trashed ? query.not('deleted_at', 'is', null) : query.is('deleted_at', null);
   const rows = must(await query);
@@ -135,13 +135,16 @@ export async function getProduct(id) {
   };
 }
 
+const cleanList = (list) => [...new Set((list || []).map((s) => String(s).trim()).filter(Boolean))];
+
 export async function saveProduct(form) {
   const payload = {
     id: form.id || null,
     slug: form.slug, name: form.name.trim(), category_id: form.category_id,
     short_description: form.short_description, full_description: form.full_description,
     specs: form.specs.filter((s) => s.label.trim() || s.value.trim()).map((s) => ({ label: s.label.trim(), value: s.value.trim() })),
-    features: form.features, applications: form.applications, keywords: form.keywords,
+    // never save empty lines (they would show as empty bullet points on the website)
+    features: cleanList(form.features), applications: cleanList(form.applications), keywords: cleanList(form.keywords),
     status: form.status, is_featured: form.is_featured,
     seo_title: form.seo_title, seo_description: form.seo_description,
     images: form.images.map((i) => ({ media_id: i.media_id, alt_text: i.alt_text })),

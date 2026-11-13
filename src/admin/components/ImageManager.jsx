@@ -6,19 +6,26 @@ import { moveItem } from '../lib/listUtils';
 import { IconButton, MUTED, Notice } from './ui';
 
 // Photos of one item. value: [{ media_id, url, alt_text }]; the first one is the main photo.
-export default function ImageManager({ value, onChange, defaultAlt = '', userId, single = false }) {
+// showAlt=false hides the "what does it show?" box where the description isn't used (category tiles).
+const MAX_PHOTOS_AT_ONCE = 12;
+
+export default function ImageManager({ value, onChange, defaultAlt = '', userId, single = false, showAlt = true }) {
   const inputRef = useRef(null);
   const [busy, setBusy] = useState(0);
   const [messages, setMessages] = useState([]);
   const [dragOver, setDragOver] = useState(false);
 
   const handleFiles = async (fileList) => {
-    const files = Array.from(fileList || []).slice(0, single ? 1 : 12);
+    const chosen = Array.from(fileList || []);
+    const files = chosen.slice(0, single ? 1 : MAX_PHOTOS_AT_ONCE);
     if (!files.length) return;
     setMessages([]);
     setBusy(files.length);
     let next = single ? [] : [...value];
     const notes = [];
+    if (!single && chosen.length > MAX_PHOTOS_AT_ONCE) {
+      notes.push({ type: 'info', text: `You chose ${chosen.length} photos. The first ${MAX_PHOTOS_AT_ONCE} were added — add the other ${chosen.length - MAX_PHOTOS_AT_ONCE} in a second go.` });
+    }
     for (const file of files) {
       try {
         const img = await uploadImage(file, { altText: defaultAlt, userId });
@@ -56,7 +63,7 @@ export default function ImageManager({ value, onChange, defaultAlt = '', userId,
                   )}
                 </div>
                 <div className="flex-1 min-w-0 p-2 space-y-1">
-                  <label className="block">
+                  {showAlt && <label className="block">
                     <span className={`block text-[13px] ${MUTED} mb-1`}>What does it show?</span>
                     <input
                       className="w-full min-h-11 border border-[#8a8a8a] px-2 text-[15px] focus:border-accent focus:outline-none"
@@ -64,7 +71,7 @@ export default function ImageManager({ value, onChange, defaultAlt = '', userId,
                       value={img.alt_text}
                       onChange={(e) => onChange(value.map((v, j) => (j === i ? { ...v, alt_text: e.target.value } : v)))}
                     />
-                  </label>
+                  </label>}
                   <div className="flex flex-wrap items-center">
                     {!single && (
                       <>

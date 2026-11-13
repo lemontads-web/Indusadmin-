@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-// status: 'loading' | 'signedOut' | 'noAccess' | 'ready'
+// status: 'loading' | 'signedOut' | 'noAccess' | 'error' (couldn't check — connection problem) | 'ready'
 // role:   'owner' | 'editor' | 'sales' | null
 export const AdminAuthContext = createContext({ status: 'loading', session: null, role: null });
 export const useAdminAuth = () => useContext(AdminAuthContext);

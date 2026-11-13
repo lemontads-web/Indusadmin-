@@ -1,5 +1,28 @@
 # Changes Document
 
+## Session Summary: Admin Panel Audit Fixes
+
+Bugs:
+- Renaming a product after its first save no longer changes its web address (each product gets a fresh form; tested with a real save).
+- Clicking an item in the error list no longer asks "Leave without saving?".
+- Text typed in an "Add" box is added when you leave the box; emptied lines remove themselves; empty entries are never saved.
+- "Web address already used" opens the address box, explains the fix, and "Make unique" now works on existing products too.
+- Category photo no longer shows a description box that wasn't saved.
+- A connection problem at sign-in shows "We couldn't check your account — Try again" instead of "not staff".
+- No more flash of the sign-in page after signing in; the button stops spinning if the check fails.
+
+Smaller fixes:
+- Box headings linked to their content for screen readers (no ids with spaces).
+- Category "Move up/down" spoken names start with the visible words.
+- Every photo is re-saved before upload, removing hidden GPS/camera data.
+- Choosing more than 12 photos explains that only the first 12 were added.
+- Admin search uses each product's search words (e.g. "geyser").
+- Public Home: categories without products are hidden; a category without a photo shows the logo.
+- `public/robots.txt` keeps /admin out of search engines.
+- New database rules (`20261113000600_editor_upload_cleanup.sql`): staff can see photo-file records (needed for any file delete) and editors can remove their own unfinished uploads. 58 automated checks. **Not yet applied to the live database — paste the file into Supabase → SQL Editor.**
+
+Tested with the owner login: create draft with a reused library photo, rename (address kept), Move to Trash, Undo, delete forever — nothing left behind.
+
 ## Session Summary: Admin Panel Phase 4 + Accessibility / Usability Redesign
 
 **Admin panel (`/admin`)** — separate download, hidden from Google:

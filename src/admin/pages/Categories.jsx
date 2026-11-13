@@ -59,7 +59,7 @@ function CategoryForm({ initial, onSaved, onCancel, userId }) {
       </fieldset>
       <div>
         <div className="text-[15px] font-heading mb-1.5">Photo for the Home page tile</div>
-        <ImageManager single value={form.image} onChange={(v) => set('image', v)} defaultAlt={`${form.name} — Indus Heaters`} userId={userId} />
+        <ImageManager single showAlt={false} value={form.image} onChange={(v) => set('image', v)} defaultAlt={`${form.name} — Indus Heaters`} userId={userId} />
       </div>
       <Field label="Web address" hint={`indusheaters.com/products?category=${form.slug || '…'}${initial.id ? ' — changing it breaks old links.' : ''}`}>
         <Input value={form.slug} onChange={(e) => { setSlugTouched(true); set('slug', slugify(e.target.value)); }} />
@@ -150,9 +150,9 @@ export default function Categories() {
                       <Pencil className="w-4 h-4" aria-hidden="true" /> Edit<span className="sr-only"> {c.name}</span>
                     </Button>
                     <IconButton showLabel label="Move up" icon={<ArrowUp className="w-4 h-4" />} disabled={i === 0 || busy}
-                      aria-label={`Move ${c.name} up`} onClick={() => run(() => swapCategoryOrder(c, rows[i - 1]))} />
+                      aria-label={`Move up: ${c.name}`} onClick={() => run(() => swapCategoryOrder(c, rows[i - 1]))} />
                     <IconButton showLabel label="Move down" icon={<ArrowDown className="w-4 h-4" />} disabled={i === rows.length - 1 || busy}
-                      aria-label={`Move ${c.name} down`} onClick={() => run(() => swapCategoryOrder(c, rows[i + 1]))} />
+                      aria-label={`Move down: ${c.name}`} onClick={() => run(() => swapCategoryOrder(c, rows[i + 1]))} />
                     <Button variant="quiet" className="sm:ml-auto" disabled={busy} onClick={() => trash(c)}>
                       <Trash2 className="w-4 h-4" aria-hidden="true" /> Move to Trash<span className="sr-only"> — {c.name}</span>
                     </Button>

@@ -50,7 +50,8 @@ export default function AdminAuthProvider({ children }) {
           ? { status: 'ready', session, role: staff.role, name: staff.full_name, recovery }
           : { status: 'noAccess', session, role: null, name: null, recovery });
       } catch {
-        if (alive) setState({ status: 'noAccess', session, role: null, name: null, recovery });
+        // A connection problem is not the same as "not staff" — say so and offer a retry
+        if (alive) setState({ status: 'error', session, role: null, name: null, recovery });
       }
     };
 
@@ -70,6 +71,19 @@ export default function AdminAuthProvider({ children }) {
     ...state,
     user: state.session?.user || null,
     signIn: (email, password) => client.auth.signInWithPassword({ email, password }),
+    retry: async () => {
+      setState((s) => ({ ...s, status: 'loading' }));
+      const { data } = await client.auth.getSession();
+      if (!data.session) return setState({ status: 'signedOut', session: null, role: null, name: null, recovery: false });
+      try {
+        const staff = await loadRole(client, data.session.user);
+        setState(staff
+          ? { status: 'ready', session: data.session, role: staff.role, name: staff.full_name, recovery: false }
+          : { status: 'noAccess', session: data.session, role: null, name: null, recovery: false });
+      } catch {
+        setState({ status: 'error', session: data.session, role: null, name: null, recovery: false });
+      }
+    },
     signOut: () => {
       if (designPreview) {
         try { localStorage.removeItem('indus-admin-design-preview'); } catch { /* ignore */ }

@@ -22,7 +22,7 @@ await db.exec(`
   create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('test.uid', true), '')::uuid $$;
   create schema storage;
   create table storage.buckets (id text primary key, name text, public boolean, file_size_limit bigint, allowed_mime_types text[]);
-  create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text);
+  create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text, owner_id text default (nullif(current_setting('test.uid', true), '')));
   alter table storage.objects enable row level security;
   create function storage.foldername(name text) returns text[] language sql immutable as $$ select (string_to_array(name, '/'))[1:array_length(string_to_array(name, '/'),1)-1] $$;
   grant usage on schema public, auth, storage to anon, authenticated;
@@ -163,6 +163,27 @@ await as(null, 'anon', async () => ok('visitor cannot list enquiry files', (awai
 await as(SALES, 'authenticated', async () => ok('sales can open enquiry files', (await q(`select count(*)::int c from storage.objects where bucket_id='enquiry-attachments'`))[0].c === 1));
 await as(EDITOR, 'authenticated', () => db.exec(`insert into storage.objects (bucket_id, name) values ('media','p/x.jpg')`))
   .then(() => ok('editor can upload product photos', true)).catch((e) => ok('editor can upload product photos', false, e.message));
+
+// ── Photo file clean-up ──
+await as(EDITOR, 'authenticated', () => db.exec(`insert into storage.objects (bucket_id, name) values ('media','uploads/half-done.jpg')`));
+await as(OWNER, 'authenticated', () => db.exec(`insert into storage.objects (bucket_id, name) values ('media','uploads/owners.jpg')`));
+const mediaFiles = async () => (await db.query(`select name from storage.objects where bucket_id='media' order by name`)).rows.map((r) => r.name);
+await as(EDITOR, 'authenticated', async () => {
+  await db.exec(`delete from storage.objects where name in ('uploads/half-done.jpg','uploads/owners.jpg')`);
+  const left = await mediaFiles();
+  ok('editor can remove own unfinished upload', !left.includes('uploads/half-done.jpg'));
+  ok('editor cannot remove someone else’s photo file', left.includes('uploads/owners.jpg'));
+});
+await db.exec(`insert into storage.objects (bucket_id, name, owner_id) values ('media','p/a.jpg','${EDITOR}')`);
+await as(EDITOR, 'authenticated', async () => {
+  await db.exec(`delete from storage.objects where name='p/a.jpg'`);
+  ok('editor cannot remove a photo that is in the library', (await mediaFiles()).includes('p/a.jpg'));
+});
+await as(OWNER, 'authenticated', async () => {
+  await db.exec(`delete from storage.objects where name='uploads/owners.jpg'`);
+  ok('owner can remove photo files', !(await mediaFiles()).includes('uploads/owners.jpg'));
+});
+await as(SALES, 'authenticated', async () => ok('sales cannot see photo-file records', (await q(`select count(*)::int c from storage.objects where bucket_id='media'`))[0].c === 0));
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

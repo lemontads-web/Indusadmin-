@@ -1,0 +1,4 @@
+# Indus Heaters — allow the whole website, keep the admin panel out of search engines
+User-agent: *
+Disallow: /admin
+Allow: /

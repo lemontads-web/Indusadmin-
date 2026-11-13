@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAdminAuth } from '../authContext';
 import { Button, Field, Input, MUTED, Notice } from '../components/ui';
@@ -9,7 +9,6 @@ import finalLogo from '../../assets/Final logo.png';
 export default function Login() {
   const { status, signIn, signOut, sendReset } = useAdminAuth();
   const location = useLocation();
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +21,7 @@ export default function Login() {
     document.title = `${mode === 'login' ? 'Sign in' : 'Reset password'} · Indus Heaters admin`;
   }, [mode]);
 
+  // Home opens by itself once the account check finishes (see `status` below)
   if (status === 'ready') return <Navigate to={location.state?.from || '/admin'} replace />;
 
   const submit = async (event) => {
@@ -38,11 +38,11 @@ export default function Login() {
       } else {
         const { error: e } = await signIn(email.trim(), password);
         if (e) throw new Error(/invalid login/i.test(e.message) ? 'That email and password don’t match. Check for typing mistakes, or use “Forgot your password?”.' : e.message);
-        navigate(location.state?.from || '/admin', { replace: true });
+        return; // stay "busy" until the account check finishes and Home opens
       }
+      setBusy(false);
     } catch (e) {
       setError(friendlyError(e));
-    } finally {
       setBusy(false);
     }
   };
@@ -58,6 +58,9 @@ export default function Login() {
             {mode === 'forgot' && <p className={`text-[15px] ${MUTED}`}>Enter your email and we’ll send you a link to choose a new one.</p>}
           </div>
 
+          {status === 'error' && (
+            <Notice type="error" title="We couldn’t check your account">This is usually a connection problem. Please try signing in again.</Notice>
+          )}
           {(status === 'noAccess' || location.state?.noAccess) && (
             <Notice type="error" title="This account can’t open the admin panel">
               It isn’t set up as staff. <button type="button" className="underline underline-offset-2 min-h-11" onClick={signOut}>Sign out</button> and use an admin account, or ask the owner to add you.
@@ -85,7 +88,8 @@ export default function Login() {
             </Field>
           )}
 
-          <Button type="submit" loading={busy} className="w-full min-h-12 text-[16px]">
+          {/* stops spinning if the account check ends in an error */}
+          <Button type="submit" loading={busy && status !== 'noAccess' && status !== 'error'} className="w-full min-h-12 text-[16px]">
             {mode === 'login' ? 'Sign in' : 'Send me a reset link'}
           </Button>
           <button

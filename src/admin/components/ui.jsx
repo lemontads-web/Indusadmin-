@@ -89,8 +89,9 @@ export function Select({ children, className = '', ...props }) {
 }
 
 export function Card({ title, step, description, actions, children, className = '', id }) {
+  const titleId = useId();
   return (
-    <section id={id} className={`bg-white border border-black/10 ${className}`} aria-labelledby={title ? `${id || title}-title` : undefined}>
+    <section id={id} className={`bg-white border border-black/10 ${className}`} aria-labelledby={title ? titleId : undefined}>
       {(title || actions) && (
         <div className="flex items-start justify-between gap-3 px-4 sm:px-5 pt-4 pb-3 border-b border-black/10">
           <div className="flex items-start gap-3">
@@ -98,7 +99,7 @@ export function Card({ title, step, description, actions, children, className = 
               <span className="mt-0.5 inline-flex items-center justify-center w-7 h-7 shrink-0 bg-accent text-white text-[14px] font-heading" aria-hidden="true">{step}</span>
             )}
             <div>
-              {title && <h2 id={`${id || title}-title`} className="text-[18px] text-primary">{title}</h2>}
+              {title && <h2 id={titleId} className="text-[18px] text-primary">{title}</h2>}
               {description && <p className={`text-[14px] ${MUTED} mt-0.5`}>{description}</p>}
             </div>
           </div>

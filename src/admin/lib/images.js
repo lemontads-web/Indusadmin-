@@ -1,11 +1,11 @@
 // Prepares a photo in the browser before upload:
 //  • rejects files the site can't show
-//  • shrinks big photos to max 1600 px (JPEG, ~85% quality)
+//  • re-saves EVERY photo as JPEG (max 1600 px, ~85% quality). Re-saving drops hidden
+//    camera data such as GPS location, so a photo never reveals where it was taken.
 //  • fingerprints the ORIGINAL file (SHA-256) so the same photo is never stored twice
 
 const MAX_SIDE = 1600;
 const MAX_INPUT_MB = 25;
-const KEEP_AS_IS_BYTES = 1.5 * 1024 * 1024; // small, web-ready photos are uploaded untouched
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp'];
 
 export const ACCEPT_ATTR = ACCEPTED.join(',');
@@ -37,12 +37,6 @@ export async function prepareImage(file) {
   const hash = await sha256(original);
   const img = await loadImage(file);
   const { naturalWidth: w, naturalHeight: h } = img;
-
-  const fitsAlready = Math.max(w, h) <= MAX_SIDE && file.size <= KEEP_AS_IS_BYTES && file.type !== 'image/png';
-  if (fitsAlready) {
-    const ext = file.type === 'image/webp' ? 'webp' : 'jpg';
-    return { blob: file, width: w, height: h, hash, mime: file.type, ext, name: file.name };
-  }
 
   const scale = Math.min(1, MAX_SIDE / Math.max(w, h));
   const canvas = document.createElement('canvas');
