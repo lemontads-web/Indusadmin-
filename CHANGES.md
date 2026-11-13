@@ -28,7 +28,7 @@ Smaller fixes:
 - Admin search uses each product's search words (e.g. "geyser").
 - Public Home: categories without products are hidden; a category without a photo shows the logo.
 - `public/robots.txt` keeps /admin out of search engines.
-- New database rules (`20261113000600_editor_upload_cleanup.sql`): staff can see photo-file records (needed for any file delete) and editors can remove their own unfinished uploads. 58 automated checks. **Not yet applied to the live database — paste the file into Supabase → SQL Editor.**
+- New database rules (`20261113000600_editor_upload_cleanup.sql`): staff can see photo-file records (needed for any file delete) and editors can remove their own unfinished uploads. 58 automated checks. Applied to the live database (confirmed 13 Nov 2026).
 
 Tested with the owner login: create draft with a reused library photo, rename (address kept), Move to Trash, Undo, delete forever — nothing left behind.
 
