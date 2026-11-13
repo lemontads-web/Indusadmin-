@@ -32,6 +32,7 @@ export const useCartStore = create(
           return {
             items: [...state.items, { 
               id: product.id, 
+              slug: product.slug, // lets the enquiry inbox link to the product
               name: product.name, 
               category: product.categoryLabel, 
               image: product.images[0],

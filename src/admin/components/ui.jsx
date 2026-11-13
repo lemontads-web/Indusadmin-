@@ -4,9 +4,9 @@
 import { useEffect, useId, cloneElement, isValidElement } from 'react';
 import { Link } from 'react-router-dom';
 import { AlertTriangle, CheckCircle2, Info, Loader2, X } from 'lucide-react';
-import { MUTED, FIELD_BORDER, STATUS } from '../lib/tokens';
+import { MUTED, FIELD_BORDER, STATUS, ENQUIRY_STATUS } from '../lib/tokens';
 
-export { MUTED, STATUS };
+export { MUTED, STATUS, ENQUIRY_STATUS };
 
 
 const base = 'inline-flex items-center justify-center gap-2 min-h-11 px-5 text-[15px] font-heading transition-colors disabled:opacity-50 disabled:cursor-not-allowed select-none';
@@ -126,6 +126,11 @@ export function PageHeader({ title, subtitle, actions, docTitle }) {
   );
 }
 
+
+export function EnquiryBadge({ status }) {
+  const s = ENQUIRY_STATUS[status] || ENQUIRY_STATUS.new;
+  return <span className={`inline-flex items-center px-2 py-0.5 text-[13px] font-heading whitespace-nowrap ${s.badge}`}>{s.label}</span>;
+}
 
 export function StatusBadge({ status }) {
   const s = STATUS[status] || STATUS.draft;

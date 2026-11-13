@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Package, FolderTree, AlertTriangle, ChevronRight } from 'lucide-react';
-import { useAdminAuth, canEditContent } from '../authContext';
-import { getDashboard, friendlyError } from '../lib/api';
+import { Plus, Package, FolderTree, AlertTriangle, ChevronRight, Inbox, Image as ImageIcon } from 'lucide-react';
+import { useAdminAuth, canEditContent, canManageEnquiries } from '../authContext';
+import { getDashboard, countNewEnquiries, friendlyError } from '../lib/api';
 import { Card, MUTED, Notice, PageHeader, Spinner, StatusBadge } from '../components/ui';
 
 function Task(props) {
@@ -37,6 +37,15 @@ export default function Dashboard() {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const editor = canEditContent(role);
+  const sales = canManageEnquiries(role);
+  const [newEnquiries, setNewEnquiries] = useState(null);
+
+  useEffect(() => {
+    if (!sales) return undefined;
+    let alive = true;
+    countNewEnquiries().then((n) => alive && setNewEnquiries(n)).catch(() => alive && setNewEnquiries(null));
+    return () => { alive = false; };
+  }, [sales]);
 
   useEffect(() => {
     if (!editor) return undefined;
@@ -45,11 +54,22 @@ export default function Dashboard() {
     return () => { alive = false; };
   }, [editor]);
 
+  const enquiriesBox = sales && newEnquiries !== null && (
+    <Link to="/admin/enquiries" className={`flex items-center gap-4 p-4 sm:p-5 mb-6 border-2 ${newEnquiries ? 'border-accent bg-accent/5' : 'border-black/10 bg-white'} hover:border-accent`}>
+      <Inbox className={`w-8 h-8 shrink-0 ${newEnquiries ? 'text-accent' : ''}`} aria-hidden="true" />
+      <span className="flex-1">
+        <span className="block text-[18px] font-heading">{newEnquiries ? `${newEnquiries} new enquir${newEnquiries === 1 ? 'y' : 'ies'} waiting` : 'No new enquiries'}</span>
+        <span className={`block text-[14px] ${MUTED}`}>{newEnquiries ? 'Open the inbox to reply on WhatsApp or by phone.' : 'You’re all caught up. Open the inbox to see earlier ones.'}</span>
+      </span>
+      <ChevronRight className="w-5 h-5 shrink-0" aria-hidden="true" />
+    </Link>
+  );
+
   if (!editor) {
     return (
       <>
         <PageHeader title="Welcome" subtitle={user?.email} docTitle="Home" />
-        <Notice type="info">The enquiries inbox for your role is coming soon.</Notice>
+        {enquiriesBox || <Spinner label="Checking for new enquiries…" />}
       </>
     );
   }
@@ -59,11 +79,13 @@ export default function Dashboard() {
   return (
     <>
       <PageHeader title={greeting} subtitle="What would you like to do today?" docTitle="Home" />
+      {enquiriesBox}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         <Task primary to="/admin/products/new" icon={Plus} title="Add a new product" text="Name, photos and details" />
         <Task to="/admin/products" icon={Package} title="Edit products" text="Change details, photos or visibility" />
         <Task to="/admin/categories" icon={FolderTree} title="Organise categories" text="Add, rename or reorder" />
+        <Task to="/admin/photos" icon={ImageIcon} title="Photo library" text="See where photos are used, tidy unused ones" />
       </div>
 
       <Notice type="error">{error}</Notice>

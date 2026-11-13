@@ -203,3 +203,84 @@ export async function uploadImage(file, { altText = '', userId } = {}) {
   }
   return { media_id: row.id, url: mediaUrl(path), alt_text: altText, reused: false };
 }
+
+// ── Photo library ─────────────────────────────────────────────────
+// Every photo with where it is used. A photo counts as "used" if any product
+// (also drafts, hidden, or in Trash — so restoring them keeps their photos)
+// or any category tile points to it.
+export async function listLibrary() {
+  const [media, links, cats] = await Promise.all([
+    db().from('media')
+      .select('id, path, original_filename, alt_text, width, height, size_bytes, created_at')
+      .eq('bucket', 'media').is('deleted_at', null)
+      .order('created_at', { ascending: false }).then(must),
+    db().from('product_images').select('media_id, product:products(id, name, status, deleted_at)').then(must),
+    db().from('categories').select('id, name, image_id, deleted_at').not('image_id', 'is', null).then(must),
+  ]);
+  const usage = new Map(media.map((m) => [m.id, []]));
+  for (const l of links) {
+    if (l.product && usage.has(l.media_id)) {
+      usage.get(l.media_id).push({ kind: 'product', id: l.product.id, name: l.product.name, status: l.product.status, trashed: Boolean(l.product.deleted_at) });
+    }
+  }
+  for (const c of cats) {
+    if (usage.has(c.image_id)) usage.get(c.image_id).push({ kind: 'category', id: c.id, name: c.name, trashed: Boolean(c.deleted_at) });
+  }
+  return media.map((m) => ({ ...m, url: mediaUrl(m.path), usedBy: usage.get(m.id) || [] }));
+}
+
+export const updateMediaAlt = async (id, altText) =>
+  must(await db().from('media').update({ alt_text: altText.trim() || null }).eq('id', id));
+
+// Owner only, and only when nothing uses the photo (the database refuses otherwise).
+export async function deleteMediaForever(photo) {
+  if (photo.usedBy.length) throw new Error('This photo is still used, so it can’t be deleted. Remove it from those products or categories first.');
+  must(await db().from('media').delete().eq('id', photo.id));
+  const { error } = await db().storage.from('media').remove([photo.path]);
+  if (error) throw new Error('The photo was removed from the library, but its file could not be deleted from storage. It will not show anywhere.');
+}
+
+// ── Enquiries inbox ───────────────────────────────────────────────
+const ENQUIRY_LIST_FIELDS = `id, customer_name, company_name, phone, has_whatsapp, email, city, status, source,
+  internal_notes, created_at, updated_at, items:enquiry_items(product_name, quantity), attachments:enquiry_attachments(id)`;
+
+export async function listEnquiries() {
+  return must(await db().from('enquiries').select(ENQUIRY_LIST_FIELDS).order('created_at', { ascending: false }));
+}
+
+export async function countNewEnquiries() {
+  const { count, error } = await db().from('enquiries').select('id', { head: true, count: 'exact' }).eq('status', 'new');
+  if (error) throw error;
+  return count || 0;
+}
+
+export async function getEnquiry(id) {
+  const e = must(await db().from('enquiries')
+    .select(`id, customer_name, company_name, phone, has_whatsapp, email, city, delivery_address, message, status, source,
+             internal_notes, created_at, updated_at,
+             items:enquiry_items(id, product_name, quantity, measurements, note, product:products(id, slug, status, category:categories(slug))),
+             attachments:enquiry_attachments(id, path, filename, mime_type, size_bytes)`)
+    .eq('id', id).single());
+  return e;
+}
+
+export const updateEnquiry = async (id, fields) =>
+  must(await db().from('enquiries').update(fields).eq('id', id).select('id, status, internal_notes, updated_at').single());
+
+// A short-lived private link to an attached file (customers' files are not public)
+export async function attachmentLink(att, { download = false } = {}) {
+  const { data, error } = await db().storage.from('enquiry-attachments')
+    .createSignedUrl(att.path, 300, download ? { download: att.filename || true } : undefined);
+  if (error) throw error;
+  return data.signedUrl;
+}
+
+// Owner only: removes the attached files, then the enquiry
+export async function deleteEnquiryForever(enquiry) {
+  const paths = (enquiry.attachments || []).map((a) => a.path);
+  if (paths.length) {
+    const { error } = await db().storage.from('enquiry-attachments').remove(paths);
+    if (error) throw error;
+  }
+  must(await db().from('enquiries').delete().eq('id', enquiry.id));
+}

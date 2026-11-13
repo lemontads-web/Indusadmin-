@@ -1,24 +1,53 @@
+import { useEffect, useState } from 'react';
 import { NavLink, Outlet, Link, useLocation } from 'react-router-dom';
-import { Home, Package, FolderTree, Trash2, LogOut, ExternalLink, Eye } from 'lucide-react';
-import { useAdminAuth, canEditContent } from '../authContext';
+import { Home, Package, FolderTree, Trash2, LogOut, ExternalLink, Eye, Image as ImageIcon, Inbox, Menu, X } from 'lucide-react';
+import { useAdminAuth, canEditContent, canManageEnquiries } from '../authContext';
+import { countNewEnquiries } from '../lib/api';
 import { MUTED } from './ui';
 import finalLogo from '../../assets/Final logo.png';
 
 const ROLE_LABEL = { owner: 'Owner', editor: 'Editor', sales: 'Sales' };
+const NEW_CHECK_EVERY_MS = 60000;
+
+function Badge({ count }) {
+  if (!count) return null;
+  return (
+    <span className="ml-auto inline-flex items-center justify-center min-w-6 h-6 px-1.5 bg-accent text-white text-[13px] font-heading" aria-label={`${count} new`}>
+      {count > 99 ? '99+' : count}
+    </span>
+  );
+}
 
 export default function AdminLayout() {
   const { user, role, signOut, preview } = useAdminAuth();
   const { pathname } = useLocation();
   const editor = canEditContent(role);
+  const sales = canManageEnquiries(role);
+  const [newEnquiries, setNewEnquiries] = useState(0);
+  const [moreOpen, setMoreOpen] = useState(false);
   // The product form has its own save bar at the bottom of the phone screen
   const onEditPage = /^\/admin\/products\/(new|[^/]+)$/.test(pathname);
 
+  // Keep the "new enquiries" number fresh: on every page change and once a minute
+  useEffect(() => {
+    if (!sales) return undefined;
+    let alive = true;
+    const check = () => countNewEnquiries().then((n) => alive && setNewEnquiries(n)).catch(() => {});
+    check();
+    const timer = setInterval(check, NEW_CHECK_EVERY_MS);
+    return () => { alive = false; clearInterval(timer); };
+  }, [sales, pathname]);
+
   const links = [
-    { to: '/admin', label: 'Home', Icon: Home, end: true, show: true },
-    { to: '/admin/products', label: 'Products', Icon: Package, show: editor },
-    { to: '/admin/categories', label: 'Categories', Icon: FolderTree, show: editor },
-    { to: '/admin/trash', label: 'Trash', Icon: Trash2, show: editor },
+    { to: '/admin', label: 'Home', Icon: Home, end: true, show: true, phone: true },
+    { to: '/admin/enquiries', label: 'Enquiries', Icon: Inbox, show: sales, phone: true, badge: newEnquiries },
+    { to: '/admin/products', label: 'Products', Icon: Package, show: editor, phone: true },
+    { to: '/admin/photos', label: 'Photos', Icon: ImageIcon, show: editor, phone: true },
+    { to: '/admin/categories', label: 'Categories', Icon: FolderTree, show: editor, phone: false },
+    { to: '/admin/trash', label: 'Trash', Icon: Trash2, show: editor, phone: false },
   ].filter((l) => l.show);
+  const phoneLinks = links.filter((l) => l.phone);
+  const moreLinks = links.filter((l) => !l.phone);
 
   return (
     <div className="admin-ui min-h-screen bg-[#f6f6f6]">
@@ -65,11 +94,12 @@ export default function AdminLayout() {
                 className={({ isActive }) => `flex items-center gap-3 px-5 min-h-12 text-[16px] border-l-4 transition-colors ${
                   isActive ? 'border-accent text-accent bg-accent/5 font-heading' : 'border-transparent text-primary hover:text-accent hover:bg-black/[0.03]'}`}>
                 <LinkIcon className="w-5 h-5" aria-hidden="true" /> {link.label}
+                <Badge count={link.badge} />
               </NavLink>
             );
           })}
           <p className={`mt-6 mx-5 pt-4 border-t border-black/10 text-[14px] ${MUTED}`}>
-            Banners, photo library and enquiries are coming next.
+            Coming later: banners &amp; offers, WhatsApp alerts.
           </p>
         </nav>
 
@@ -80,19 +110,49 @@ export default function AdminLayout() {
 
       {/* Phone: bottom tab bar with words, always in thumb reach */}
       {!onEditPage && (
-        <nav aria-label="Admin sections" className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-white border-t border-black/15 grid"
-          style={{ gridTemplateColumns: `repeat(${links.length}, minmax(0, 1fr))` }}>
-          {links.map((link) => {
-            const LinkIcon = link.Icon;
-            return (
-              <NavLink key={link.to} to={link.to} end={link.end}
-                className={({ isActive }) => `flex flex-col items-center justify-center gap-0.5 min-h-16 text-[13px] border-t-[3px] ${
-                  isActive ? 'border-accent text-accent font-heading' : 'border-transparent text-primary'}`}>
-                <LinkIcon className="w-5 h-5" aria-hidden="true" /> {link.label}
-              </NavLink>
-            );
-          })}
-        </nav>
+        <>
+          {moreOpen && moreLinks.length > 0 && (
+            <div className="md:hidden fixed inset-0 z-30 bg-black/20" onClick={() => setMoreOpen(false)} aria-hidden="true" />
+          )}
+          {moreOpen && moreLinks.length > 0 && (
+            <div id="admin-more-menu" className="md:hidden fixed bottom-16 inset-x-0 z-40 bg-white border-t border-black/15 shadow-lg">
+              {moreLinks.map((link) => {
+                const LinkIcon = link.Icon;
+                return (
+                  <NavLink key={link.to} to={link.to} onClick={() => setMoreOpen(false)}
+                    className={({ isActive }) => `flex items-center gap-3 px-5 min-h-14 text-[16px] border-b border-black/10 ${isActive ? 'text-accent font-heading' : 'text-primary'}`}>
+                    <LinkIcon className="w-5 h-5" aria-hidden="true" /> {link.label}
+                  </NavLink>
+                );
+              })}
+            </div>
+          )}
+          <nav aria-label="Admin sections" className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-black/15 grid"
+            style={{ gridTemplateColumns: `repeat(${phoneLinks.length + (moreLinks.length ? 1 : 0)}, minmax(0, 1fr))` }}>
+            {phoneLinks.map((link) => {
+              const LinkIcon = link.Icon;
+              return (
+                <NavLink key={link.to} to={link.to} end={link.end} onClick={() => setMoreOpen(false)}
+                  className={({ isActive }) => `relative flex flex-col items-center justify-center gap-0.5 min-h-16 text-[13px] border-t-[3px] ${
+                    isActive ? 'border-accent text-accent font-heading' : 'border-transparent text-primary'}`}>
+                  <LinkIcon className="w-5 h-5" aria-hidden="true" /> {link.label}
+                  {link.badge > 0 && (
+                    <span className="absolute top-1.5 left-1/2 ml-2 min-w-5 h-5 px-1 bg-accent text-white text-[12px] leading-5 text-center" aria-label={`${link.badge} new`}>
+                      {link.badge > 99 ? '99+' : link.badge}
+                    </span>
+                  )}
+                </NavLink>
+              );
+            })}
+            {moreLinks.length > 0 && (
+              <button type="button" onClick={() => setMoreOpen((o) => !o)} aria-expanded={moreOpen} aria-controls="admin-more-menu"
+                className={`flex flex-col items-center justify-center gap-0.5 min-h-16 text-[13px] border-t-[3px] ${
+                  moreOpen || moreLinks.some((l) => pathname.startsWith(l.to)) ? 'border-accent text-accent font-heading' : 'border-transparent text-primary'}`}>
+                {moreOpen ? <X className="w-5 h-5" aria-hidden="true" /> : <Menu className="w-5 h-5" aria-hidden="true" />} More
+              </button>
+            )}
+          </nav>
+        </>
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { isSupabaseConfigured } from '../lib/supabase';
 import AdminAuthProvider from './AdminAuthProvider';
-import { useAdminAuth, canEditContent } from './authContext';
+import { useAdminAuth, canEditContent, canManageEnquiries } from './authContext';
 import AdminLayout from './components/AdminLayout';
 import { Button, Notice, Spinner } from './components/ui';
 import Login from './pages/Login';
@@ -12,6 +12,9 @@ import ProductsList from './pages/ProductsList';
 import ProductEdit from './pages/ProductEdit';
 import Categories from './pages/Categories';
 import Trash from './pages/Trash';
+import Photos from './pages/Photos';
+import Enquiries from './pages/Enquiries';
+import EnquiryDetail from './pages/EnquiryDetail';
 
 // Keep the admin panel out of Google
 function useNoIndex() {
@@ -43,7 +46,7 @@ function CheckFailed() {
   );
 }
 
-function RequireStaff({ children, editorsOnly = false }) {
+function RequireStaff({ children, editorsOnly = false, enquiriesOnly = false }) {
   const { status, role } = useAdminAuth();
   const location = useLocation();
   if (status === 'loading') return <Spinner label="Checking your login…" />;
@@ -51,6 +54,7 @@ function RequireStaff({ children, editorsOnly = false }) {
   if (status === 'signedOut') return <Navigate to="/admin/login" replace state={{ from: location.pathname }} />;
   if (status === 'noAccess') return <Navigate to="/admin/login" replace state={{ noAccess: true }} />;
   if (editorsOnly && !canEditContent(role)) return <Navigate to="/admin" replace />;
+  if (enquiriesOnly && !canManageEnquiries(role)) return <Navigate to="/admin" replace />;
   return children;
 }
 
@@ -89,6 +93,9 @@ export default function AdminApp() {
           <Route path="products/:id" element={<RequireStaff editorsOnly><ProductEditRoute /></RequireStaff>} />
           <Route path="categories" element={<RequireStaff editorsOnly><Categories /></RequireStaff>} />
           <Route path="trash" element={<RequireStaff editorsOnly><Trash /></RequireStaff>} />
+          <Route path="photos" element={<RequireStaff editorsOnly><Photos /></RequireStaff>} />
+          <Route path="enquiries" element={<RequireStaff enquiriesOnly><Enquiries /></RequireStaff>} />
+          <Route path="enquiries/:id" element={<RequireStaff enquiriesOnly><EnquiryDetail /></RequireStaff>} />
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Route>
       </Routes>

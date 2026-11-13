@@ -212,8 +212,8 @@ Settings screen will hold: the WhatsApp business number shown to customers (+91 
 | 3. Public site on live data ✅ **done (13 Nov 2026)** | Site reads categories, products, photos, related links, banners and WhatsApp number from Supabase; shows built-in data instantly and if Supabase is unreachable; top strip + Home hero offer slide. | 2–3 days |
 | 4. Admin: auth + products + categories ✅ **built (13 Nov 2026)** | Sign in, Home, products, product form with photos, categories, Trash; accessibility redesign. Signed-in saving still to be tested with the owner login. | 5–7 days |
 | 5. Admin: banners & offers | Scheduling, placements, preview, festival templates | 3–4 days |
-| 6. Media library + duplicate finder | | 2 days |
-| 7. Enquiries inbox + WhatsApp | Inbox, statuses, export; WhatsApp buttons for customers and replies; email alert, then automatic WhatsApp alert once Meta approves | 4–5 days (+ Meta approval wait) |
+| 6. Media library ✅ **done (13 Nov 2026)** | Photo library with usage, unused filter, descriptions, owner delete. (Visual duplicate finder not built — exact duplicates are already blocked on upload.) | 2 days |
+| 7. Enquiries inbox ✅ **done (13 Nov 2026)**; WhatsApp alerts later | Inbox, statuses, export; WhatsApp buttons for customers and replies; email alert, then automatic WhatsApp alert once Meta approves | 4–5 days (+ Meta approval wait) |
 | 8. SEO + polish + Hostinger go-live | Pre-rendering, sitemap, activity log, phone/desktop testing, deploy to Hostinger, SSL, domain | 3–4 days |
 
 \*One developer, rough working days. Total roughly 22–30 days.

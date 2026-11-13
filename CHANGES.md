@@ -1,5 +1,22 @@
 # Changes Document
 
+## Session Summary: Photo Library (Phase 6) + Enquiries Inbox (Phase 7)
+
+**Photo library** (`/admin/photos`, owner/editor):
+- Every photo with size, file name and where it is used (products incl. drafts/hidden/Trash, category tiles), with links.
+- Filters All / Used / Not used + search; add photos straight to the library (duplicates detected); edit the library description.
+- Owner can delete unused photos forever (record and file); used photos can't be deleted.
+
+**Enquiries inbox** (`/admin/enquiries`, owner/sales):
+- Website enquiry form now saves into the inbox (with up to 5 attached files in private storage) **and** still sends the Basin email copy; it counts as sent if either works.
+- List: stage filters (New, Contacted, Quote sent, Order received, Closed, All) with counts, search, CSV download for Excel.
+- Detail: customer details, products with quantities/sizes/notes, private file open/download, "Reply on WhatsApp" (pre-filled, +91 added, marks Contacted), Call, Email, stage choice, team notes, owner-only delete.
+- Menu badge and Home box for new enquiries (checked every minute); Sales role sees Home + Enquiries.
+- Phone bottom bar: Home, Enquiries, Products, Photos, More (Categories, Trash).
+- WhatsApp alerts postponed (user chose email now — Basin copy).
+
+Tested with the owner login: test photo uploaded, described, deleted (file removed); test enquiry with a file saved, listed, opened, file opened privately (public link blocked), stage + notes changed, deleted — nothing left behind.
+
 ## Session Summary: Hosted on Vercel
 
 - Live at **https://indus-heaters.vercel.app** (Vercel project `indus-heaters`, team "sha", Hobby plan).

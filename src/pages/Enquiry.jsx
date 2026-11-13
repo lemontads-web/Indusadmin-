@@ -5,6 +5,7 @@ import { useCartStore } from '../store/useCartStore';
 import SectionHeading from '../components/SectionHeading';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { whatsappLink, listEnquiryMessage } from '../utils/whatsapp';
+import { saveEnquiryToInbox, ENQUIRY_FILE_ACCEPT } from '../utils/enquirySubmit';
 
 const RECIPIENT_EMAIL = 'shashank1341@gmail.com';
 const BASIN_ENDPOINT = 'https://usebasin.com/f/7ada9d583ec3';
@@ -58,22 +59,37 @@ export default function Enquiry() {
 
     setLoading(true);
 
-    fetch(BASIN_ENDPOINT, {
+    // 1) Save into the admin enquiries inbox  2) send the email copy (Basin).
+    // The enquiry counts as sent if EITHER works, so nothing is lost.
+    const toInbox = saveEnquiryToInbox({
+      customerName: String(buyerName || '').trim(),
+      companyName: String(companyName || '').trim(),
+      phone: String(formData.get('contactNumber') || '').trim(),
+      deliveryAddress: String(formData.get('deliveryAddress') || '').trim(),
+      items,
+      files: attachmentFiles,
+    });
+    const toEmail = fetch(BASIN_ENDPOINT, {
       method: 'POST',
       body: formData,
-      headers: {
-        Accept: 'application/json',
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('The enquiry could not be sent. Please try again.');
+      headers: { Accept: 'application/json' },
+    }).then((response) => {
+      if (!response.ok) throw new Error('Email copy failed');
+    });
+
+    Promise.allSettled([toInbox, toEmail])
+      .then(([inbox, email]) => {
+        if (inbox.status === 'rejected') console.warn('[enquiry] inbox save failed:', inbox.reason?.message || inbox.reason);
+        if (email.status === 'rejected') console.warn('[enquiry] email copy failed:', email.reason?.message || email.reason);
+        if (inbox.status === 'fulfilled' || email.status === 'fulfilled') {
+          clearCart();
+          navigate('/enquiry/success');
+        } else {
+          const reason = inbox.reason?.message || '';
+          setError(/Too many enquiries|valid phone|enter your name/i.test(reason)
+            ? reason
+            : 'The enquiry could not be sent. Please check your internet connection and try again, or send it on WhatsApp.');
         }
-        clearCart();
-        navigate('/enquiry/success');
-      })
-      .catch((submitError) => {
-        setError(submitError.message || 'The enquiry could not be sent. Please try again.');
       })
       .finally(() => {
         setLoading(false);
@@ -201,11 +217,12 @@ export default function Enquiry() {
                   <input
                     name="attachments"
                     type="file"
+                    accept={ENQUIRY_FILE_ACCEPT}
                     multiple
                     className="w-full border border-dashed border-muted/15 bg-muted/5 px-4 py-4 text-sm font-heading font-light text-primary/70 file:mr-4 file:border-0 file:bg-accent file:px-4 file:py-2 file:text-sm file:font-light file:uppercase file:tracking-wider file:text-white hover:file:bg-accent/90 file:transition-colors"
                   />
                   <p className="mt-2 text-xs text-primary font-normal leading-[1.25]">
-                    Upload drawings, sample images, or PDFs related to this enquiry.
+                    Upload drawings, sample photos, PDFs or Excel/DXF files (up to 5 files, 10 MB each).
                   </p>
                 </label>
 

@@ -7,3 +7,4 @@ export const useAdminAuth = () => useContext(AdminAuthContext);
 
 export const canEditContent = (role) => role === 'owner' || role === 'editor';
 export const isOwner = (role) => role === 'owner';
+export const canManageEnquiries = (role) => role === 'owner' || role === 'sales';
