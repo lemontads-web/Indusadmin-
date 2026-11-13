@@ -208,7 +208,7 @@ Settings screen will hold: the WhatsApp business number shown to customers (+91 
 | Phase | Scope | Estimate* |
 |---|---|---|
 | 1. Backend setup ✅ **done (13 Nov 2026)** | Live Supabase project `znajahlcdqxiwzffrcmu` (Seoul): schema, roles, row-level security, storage, hardening applied; Owner login set up; `npm run check:supabase` all ✔. To do: switch off public sign-ups. | 2–3 days |
-| 2. Migration | Script to import current 38 products, 9 categories and all images (with duplicate check) | 1–2 days |
+| 2. Migration ✅ **done (13 Nov 2026)** | 37 products, 9 categories, 64 photos, 63 photo links, 93 related links imported (`npm run import:supabase`); `npm run verify:supabase` confirms Supabase matches the site exactly. | 1–2 days |
 | 3. Public site on live data | Read from Supabase with JSON fallback, banner component | 2–3 days |
 | 4. Admin: auth + products + categories | Login, lists, forms, image uploader, trash | 5–7 days |
 | 5. Admin: banners & offers | Scheduling, placements, preview, festival templates | 3–4 days |

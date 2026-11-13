@@ -1,5 +1,13 @@
 # Changes Document
 
+## Session Summary: Admin Panel Phase 2 — Catalogue Imported into Supabase
+
+- `scripts/import-to-supabase.mjs` (`npm run import:supabase`, `-- --dry-run` to preview): signs in as the owner (password typed, hidden, never stored), uploads photos to the `media` bucket with size, SHA-256 hash and alt text, then saves categories, products, photo links and related links. Re-runnable: updates instead of duplicating. Validates data first (missing files, unknown categories, duplicate photos, self-related products).
+- Imported: 9 categories, 37 products, 64 photos (3.4 MB), 63 product photo links, 93 related links.
+- `scripts/verify-supabase-import.mjs` (`npm run verify:supabase`): reads Supabase as a visitor and compares every field, photo order and related link with the site data, and downloads sample photos.
+- Fix: "Bayonet & Threaded Thermocouples" listed itself as a related product (left over from merging the Threaded product); now links to Washer & Nozzle Thermocouples.
+- Website still reads `products.json`; switching to Supabase is Phase 3.
+
 ## Session Summary: Admin Panel Phase 1 — Supabase Backend
 
 - `supabase/migrations/` (run in order): **schema** (categories, products, product images, related products, media library, banners, enquiries + items + attachments, site settings, admin users, audit log), **security** (owner / editor / sales roles, row-level security on every table, `submit_enquiry` function for the public site, audit triggers, last-owner protection), **storage** (public `media` bucket, private `enquiry-attachments` bucket, upload rules).
