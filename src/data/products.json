@@ -1,156 +1,2061 @@
 [
   {
-    "id": "coil-heaters-01",
-    "slug": "coil-heaters",
-    "name": "Coil Heaters",
-    "category": "hot-runner",
-    "categoryLabel": "Hot Runner / Plastic Industry",
-    "images": ["/images/IMG_9425 copy.jpg"],
-    "shortDescription": "Fast response coil heaters with built-in J/K thermocouple.",
-    "fullDescription": "Engineered for tight tolerances and fast thermal response. Suitable for nozzle heating and injection molding.",
-    "specs": [
-      { "label": "Operating Temp", "value": "Up to 550°C" },
-      { "label": "Sizes", "value": "2.6x2.6 to 3.3x3.3mm" },
-      { "label": "Thermocouple", "value": "J/K type optionally built-in" }
-    ],
-    "applications": ["Plastic Extruders", "Hot Runner Nozzles", "Packaging"],
-    "features": ["Fast thermal response", "High dielectric strength", "Fully annealed to any shape"],
-    "relatedProducts": ["mi-thermocouples", "manifold-heaters"]
-  },
-  {
-    "id": "mi-thermocouple-02",
-    "slug": "mi-thermocouples",
-    "name": "MI Thermocouples",
-    "category": "hot-runner",
-    "categoryLabel": "Hot Runner / Plastic Industry",
-    "images": ["/images/15.jpg"],
-    "shortDescription": "Mineral Insulated Thermocouples available in customizable lengths.",
-    "fullDescription": "High reliability sensors built for rugged industrial environments. Can be bent to complex shapes without performance loss.",
-    "specs": [
-      { "label": "Diameter", "value": "1mm, 1.5mm, 3mm" },
-      { "label": "Length", "value": "Customizable" }
-    ],
-    "applications": ["Hot Runner Systems", "Ovens", "Die Casting"],
-    "features": ["Flexible", "High accuracy", "Fast response time"],
-    "relatedProducts": ["coil-heaters"]
-  },
-  {
-    "id": "ceramic-band-heater-001",
-    "slug": "ceramic-band-heater",
-    "name": "Ceramic Band Heater",
-    "category": "band-heaters",
-    "categoryLabel": "Band Heaters",
-    "images": ["/images/Ceramic Heaters..jpg"],
-    "shortDescription": "High thermal conductivity with built-in insulation for energy savings.",
-    "fullDescription": "Perfect for heating cylinders in injection molding machines. Built-in ceramic insulation reduces heat loss.",
-    "specs": [
-      { "label": "Operating Temperature", "value": "Up to 450°C" },
-      { "label": "Thermal Conductivity", "value": "High" },
-      { "label": "Insulation", "value": "Built-in thermal" }
-    ],
-    "applications": ["Plastic Extruders", "Blow Molding", "Injection Molding"],
-    "features": ["Uniform heat distribution", "Energy-saving insulation", "Customizable dimensions"],
-    "relatedProducts": ["mica-band-heater", "brass-sealed-band-heater"]
-  },
-  {
-    "id": "mica-band-heater-002",
-    "slug": "mica-band-heater",
-    "name": "Mica Band Heater",
-    "category": "band-heaters",
-    "categoryLabel": "Band Heaters",
-    "images": ["/images/Mica Band Heaters.jpg"],
-    "shortDescription": "Economical and excellent dielectric strength.",
-    "fullDescription": "Thin profile heaters providing fast heat transfer to cylinders.",
-    "specs": [
-      { "label": "Dielectric Strength", "value": "Excellent" },
-      { "label": "Customization", "value": "Customizable holes and cutouts" }
-    ],
-    "applications": ["Blow Molding", "Extrusion", "Packaging"],
-    "features": ["Economical", "Custom cutouts easily added", "Fast heat up"],
-    "relatedProducts": ["ceramic-band-heater"]
-  },
-  {
-    "id": "ceramic-infrared-heater-001",
-    "slug": "ceramic-infrared-heater",
-    "name": "Ceramic Infrared Heater",
-    "category": "infrared-heaters",
-    "categoryLabel": "Infrared Heaters",
-    "images": ["/images/16.jpg"],
-    "shortDescription": "Efficient radiant heaters operating between 400-600°C.",
-    "fullDescription": "Uses NiCr resistance wire embedded in a ceramic body for pure radiant heat transfer.",
-    "specs": [
-      { "label": "Operating Temperature", "value": "400 - 600°C" },
-      { "label": "Resistance", "value": "NiCr wire" }
-    ],
-    "applications": ["Drying", "Curing", "Thermoforming"],
-    "features": ["No direct contact needed", "Long operating life", "High radiant efficiency"],
-    "relatedProducts": ["silica-infrared-heater"]
-  },
-  {
-    "id": "silica-infrared-heater-002",
-    "slug": "silica-infrared-heater",
-    "name": "Silica Infrared Heater",
-    "category": "infrared-heaters",
-    "categoryLabel": "Infrared Heaters",
-    "images": ["/images/Slica glass heater.jpg"],
-    "shortDescription": "Ideal for chemical industries, high transparency to IR.",
-    "fullDescription": "High quality silica glass tube houses the heating element for distinct medium wave radiation.",
-    "specs": [
-      { "label": "OD", "value": "25 - 50mm" }
-    ],
-    "applications": ["Chemical processing", "Drying lines", "Shrink packaging"],
-    "features": ["Clean heating", "Chemically inert housing", "Fast response"],
-    "relatedProducts": ["ceramic-infrared-heater"]
-  },
-  {
-    "id": "cartridge-heater-001",
-    "slug": "high-density-cartridge-heater",
-    "name": "High Density Cartridge Heater",
-    "category": "cartridge-heaters",
-    "categoryLabel": "Cartridge Heaters",
-    "images": ["/images/Low & High Density Cartridge Heaters.jpg"],
-    "shortDescription": "Highly concentrated heat transfer up to maximum temperatures.",
-    "fullDescription": "Swaged construction allows high watt densities and excellent resistance to shock and vibration.",
-    "specs": [
-      { "label": "Diameter", "value": "Customizable" },
-      { "label": "Wattage/Voltage", "value": "Customizable" }
-    ],
-    "applications": ["Die Blocks", "Injection Molding", "Heating Plates"],
-    "features": ["High Watt Density", "Durable swaged build", "Internal thermocouples available"],
-    "relatedProducts": ["split-cartridge-heater"]
-  },
-  {
-    "id": "tubular-heater-001",
-    "slug": "tubular-heater",
-    "name": "Standard Tubular Heater",
+    "id": "ring-tubular-heaters",
+    "slug": "ring-tubular-heaters",
+    "name": "Ring Tubular Heaters",
     "category": "tubular-heaters",
     "categoryLabel": "Tubular Heaters",
-    "images": ["/images/Tubular Heaters 1.jpg"],
-    "shortDescription": "Versatile heaters for air, liquid, and solid heating applications.",
-    "fullDescription": "Available in various sheath materials including SS304, 321, 310, Inconel, and Titanium.",
-    "specs": [
-      { "label": "Materials", "value": "SS304/321/310/Inconel/Titanium" },
-      { "label": "Form Factor", "value": "Custom bent" }
+    "images": [
+      "/images/products/tubularheater1.jpg",
+      "/images/originals/tubular-heaters-2.jpg"
     ],
-    "applications": ["Casting", "Air Heating", "Corrugation"],
-    "features": ["Highly versatile", "Rugged construction", "Long lifespan"],
-    "relatedProducts": ["water-immersion-heater"]
+    "shortDescription": "Tubular elements coiled into rings for heating around pipes, tanks and vessels.",
+    "fullDescription": "Tubular heating elements wound into single or multi-turn rings, used to heat liquids and surfaces around round equipment.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Liquid Heating (Water, Oil, Chemical)",
+      "Dies & Manifolds",
+      "Ovens & Dryers",
+      "Plastic Industries",
+      "Kitchen Equipment",
+      "Medical Equipment",
+      "Packaging Industries",
+      "Domestic Applications",
+      "Chemical Industries",
+      "Food Processing Industries",
+      "Air Conditioning Systems",
+      "Foundry"
+    ],
+    "keywords": [
+      "ring heater",
+      "round heater",
+      "circular heater",
+      "coiled tubular heater",
+      "loop heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters",
+      "spiral-hot-plate-heaters"
+    ]
   },
   {
-    "id": "immersion-heater-001",
-    "slug": "water-immersion-heater",
-    "name": "Water Immersion Heater",
+    "id": "single-ended-straight-tubular-heaters",
+    "slug": "single-ended-straight-tubular-heaters",
+    "name": "Single-Ended Straight Tubular Heaters",
     "category": "tubular-heaters",
-    "categoryLabel": "Tubular & Immersion Heaters",
-    "images": ["/images/Tubular Heaters 2.jpg"],
-    "shortDescription": "Direct heat transfer for water and aqueous solutions.",
-    "fullDescription": "Constructed with SS304, 321, 316, or Copper sheaths with robust threaded plugs or flanges.",
-    "specs": [
-      { "label": "Sheath", "value": "SS304/321/316/Copper" },
-      { "label": "Mounting", "value": "Threaded plug / Flange" }
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/products/tubularheater3.jpg"
     ],
-    "applications": ["Water Tanks", "Boilers", "Cleaning Tanks"],
-    "features": ["100% efficient heat transfer", "Easy installation", "Customizable thermowells"],
-    "relatedProducts": ["oil-immersion-heater", "tubular-heater"]
+    "shortDescription": "Straight hairpin tubular heaters with both terminals at one end.",
+    "fullDescription": "Straight tubular heaters bent back on themselves (hairpin) so both terminals come out of one end — ideal for insertion into bores and channels.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Liquid Heating (Water, Oil, Chemical)",
+      "Dies & Manifolds",
+      "Ovens & Dryers",
+      "Plastic Industries",
+      "Kitchen Equipment",
+      "Medical Equipment",
+      "Packaging Industries",
+      "Domestic Applications",
+      "Chemical Industries",
+      "Food Processing Industries",
+      "Air Conditioning Systems",
+      "Foundry"
+    ],
+    "keywords": [
+      "hairpin heater",
+      "straight heater",
+      "single end heater",
+      "insertion heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "double-ended-straight-tubular-heaters",
+      "spiral-hot-plate-heaters"
+    ]
+  },
+  {
+    "id": "double-ended-straight-tubular-heaters",
+    "slug": "double-ended-straight-tubular-heaters",
+    "name": "Double-Ended Straight Tubular Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/products/tubularheater4.jpg"
+    ],
+    "shortDescription": "Straight rod tubular heaters with a terminal at each end.",
+    "fullDescription": "Straight tubular heaters with terminals at both ends, used in ovens, dryers and air heating.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Liquid Heating (Water, Oil, Chemical)",
+      "Dies & Manifolds",
+      "Ovens & Dryers",
+      "Plastic Industries",
+      "Kitchen Equipment",
+      "Medical Equipment",
+      "Packaging Industries",
+      "Domestic Applications",
+      "Chemical Industries",
+      "Food Processing Industries",
+      "Air Conditioning Systems",
+      "Foundry"
+    ],
+    "keywords": [
+      "straight rod heater",
+      "oven rod heater",
+      "double end heater",
+      "straight element",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "spiral-hot-plate-heaters"
+    ]
+  },
+  {
+    "id": "spiral-hot-plate-heaters",
+    "slug": "spiral-hot-plate-heaters",
+    "name": "Spiral Hot Plate Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/originals/35-copy.jpg"
+    ],
+    "shortDescription": "Flat spiral tubular elements for hot plates and cooking surfaces.",
+    "fullDescription": "Tubular elements formed into a flat spiral for hot plates, griddles and contact heating.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Hot Plates",
+      "Kitchen Equipment",
+      "Domestic Applications"
+    ],
+    "keywords": [
+      "hot plate element",
+      "stove coil",
+      "cooking coil",
+      "spiral heater",
+      "induction plate heater",
+      "gas stove heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "flange-immersion-heaters",
+    "slug": "flange-immersion-heaters",
+    "name": "Flange Immersion Heaters (Kettle Elements)",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/originals/34-copy.jpg"
+    ],
+    "shortDescription": "Flange-mounted immersion elements for kettles, boilers and water heaters.",
+    "fullDescription": "Tubular immersion elements mounted on a flange or threaded fitting for heating water and liquids in kettles, boilers and tanks.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Water Heaters",
+      "Kettles",
+      "Boilers",
+      "Liquid Heating"
+    ],
+    "keywords": [
+      "immersion heater",
+      "kettle element",
+      "water heater element",
+      "geyser element",
+      "geyser coil",
+      "boiler heater",
+      "water heating element",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "concentric-ring-oven-heaters",
+    "slug": "concentric-ring-oven-heaters",
+    "name": "Concentric Ring Oven Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/products/tubularheater7.jpg"
+    ],
+    "shortDescription": "Multi-ring tubular elements for ovens and grills.",
+    "fullDescription": "Tubular heaters formed into concentric rings to spread heat evenly across ovens, grills and drying chambers.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Ovens & Dryers",
+      "Kitchen Equipment",
+      "Food Processing Industries"
+    ],
+    "keywords": [
+      "oven heater",
+      "oven element",
+      "grill heater",
+      "round oven element",
+      "bakery heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "screw-plug-immersion-heaters",
+    "slug": "screw-plug-immersion-heaters",
+    "name": "Screw Plug Immersion Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/products/main-image7.jpg",
+      "/images/originals/16.jpg",
+      "/images/originals/15.jpg"
+    ],
+    "shortDescription": "Threaded screw-plug immersion heaters with terminal cover for tanks.",
+    "fullDescription": "Hairpin tubular elements fitted on a threaded screw plug with a protective terminal cover, screwed directly into tanks and vessels.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Water Tanks",
+      "Oil Tanks",
+      "Chemical Tanks",
+      "Liquid Heating"
+    ],
+    "keywords": [
+      "immersion heater",
+      "immersion rod",
+      "water heater",
+      "tank heater",
+      "oil heater",
+      "bucket heater",
+      "screw plug heater",
+      "water heating rod",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "finned-air-heaters",
+    "slug": "finned-air-heaters",
+    "name": "Finned Air Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/products/main-image10.jpg",
+      "/images/originals/21.jpg",
+      "/images/originals/tubular-heaters-3.jpg"
+    ],
+    "shortDescription": "Finned tubular elements for fast air and gas heating.",
+    "fullDescription": "Tubular elements with steel fins that increase surface area for efficient forced-air and duct heating.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Ovens & Dryers",
+      "Air Conditioning Systems",
+      "Air Ducts",
+      "Packaging Industries"
+    ],
+    "keywords": [
+      "finned heater",
+      "fin heater",
+      "air heater",
+      "duct heater",
+      "blower heater",
+      "oven air heater",
+      "space heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "serpentine-tubular-heaters",
+    "slug": "serpentine-tubular-heaters",
+    "name": "Serpentine (Grid) Tubular Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/originals/tubular-heaters-1.jpg"
+    ],
+    "shortDescription": "Tubular elements bent into a serpentine grid for wide, even heat.",
+    "fullDescription": "A tubular heater bent back and forth into a flat serpentine grid, covering a large area with even heat.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Liquid Heating (Water, Oil, Chemical)",
+      "Dies & Manifolds",
+      "Ovens & Dryers",
+      "Plastic Industries",
+      "Kitchen Equipment",
+      "Medical Equipment",
+      "Packaging Industries",
+      "Domestic Applications",
+      "Chemical Industries",
+      "Food Processing Industries",
+      "Air Conditioning Systems",
+      "Foundry"
+    ],
+    "keywords": [
+      "grid heater",
+      "zig zag heater",
+      "serpentine heater",
+      "flat tubular heater",
+      "oven grid element",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "u-shaped-tubular-heaters",
+    "slug": "u-shaped-tubular-heaters",
+    "name": "U-Shaped Bent Tubular Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/originals/17.jpg"
+    ],
+    "shortDescription": "Hairpin tubular elements bent to shape for tanks and equipment.",
+    "fullDescription": "U-shaped (hairpin) tubular heaters bent to the angle your equipment needs.",
+    "specs": [
+      {
+        "label": "Sheath Material",
+        "value": "SS304 / SS321 / SS316 / SS310 / Copper / Inconel / Titanium"
+      },
+      {
+        "label": "Element",
+        "value": "80/20 Nickel-Chrome wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "High grade MgO (magnesium oxide)"
+      },
+      {
+        "label": "Shape",
+        "value": "Straight or bent to requirement"
+      }
+    ],
+    "features": [
+      "80/20 Nickel-Chrome wire to deliver an even heat distribution",
+      "High grade MgO (magnesium oxide) used as internal insulation for best heat transfer",
+      "High thermal conductivity, dielectric strength and longer heater life",
+      "Can be mounted in any position",
+      "Available in a wide variety of shapes, diameters and ratings",
+      "Customizable based on the functional requirement"
+    ],
+    "applications": [
+      "Liquid Heating (Water, Oil, Chemical)",
+      "Dies & Manifolds",
+      "Ovens & Dryers",
+      "Plastic Industries",
+      "Kitchen Equipment",
+      "Medical Equipment",
+      "Packaging Industries",
+      "Domestic Applications",
+      "Chemical Industries",
+      "Food Processing Industries",
+      "Air Conditioning Systems",
+      "Foundry"
+    ],
+    "keywords": [
+      "U type heater",
+      "U shape heater",
+      "hairpin heater",
+      "bent heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "cast-in-plate-heaters",
+    "slug": "cast-in-plate-heaters",
+    "name": "Cast-in Plate Heaters",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/originals/dsc-0087.jpg"
+    ],
+    "shortDescription": "Tubular heating elements cast into an aluminium plate for even surface heat.",
+    "fullDescription": "Tubular heating elements cast inside an aluminium plate, giving uniform heat across the plate surface. Made to the size, wattage and voltage you need.",
+    "specs": [
+      {
+        "label": "Construction",
+        "value": "Tubular element cast in aluminium"
+      },
+      {
+        "label": "Size / Wattage / Voltage",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [],
+    "applications": [
+      "Platens",
+      "Sealing Machines",
+      "Hot Plates"
+    ],
+    "keywords": [
+      "cast in heater",
+      "aluminium plate heater",
+      "hot plate",
+      "platen heater",
+      "plate heater",
+      "sealing heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "ptfe-immersion-heaters",
+    "slug": "ptfe-immersion-heaters",
+    "name": "Fluoropolymer Immersion Heaters (PTFE / PVDF)",
+    "category": "tubular-heaters",
+    "categoryLabel": "Tubular Heaters",
+    "images": [
+      "/images/originals/img-9441.jpg"
+    ],
+    "shortDescription": "Immersion heaters with PTFE / PVDF protected elements for corrosive liquids and plating tanks.",
+    "fullDescription": "Immersion heaters whose heating elements are protected by fluoropolymer (PTFE / PVDF) tubes, mounted on a plastic head, for acids and other corrosive solutions in plating and chemical tanks. Made to the length, wattage and voltage you need.",
+    "specs": [
+      {
+        "label": "Element Protection",
+        "value": "PTFE / PVDF (fluoropolymer)"
+      },
+      {
+        "label": "Length / Wattage / Voltage",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [],
+    "applications": [
+      "Chemical Tanks",
+      "Electroplating",
+      "Acid Baths"
+    ],
+    "keywords": [
+      "teflon heater",
+      "PTFE heater",
+      "acid heater",
+      "chemical immersion heater",
+      "plating heater",
+      "corrosion proof heater",
+      "electroplating heater",
+      "plating tank heater",
+      "fluoropolymer heater",
+      "PFA immersion heater",
+      "PVDF immersion heater",
+      "heating element",
+      "heater element",
+      "tube heater",
+      "tubular element",
+      "rod heater",
+      "tubuler heater",
+      "tubular hetar",
+      "SS heater",
+      "industrial heater"
+    ],
+    "relatedProducts": [
+      "ring-tubular-heaters",
+      "single-ended-straight-tubular-heaters",
+      "double-ended-straight-tubular-heaters"
+    ]
+  },
+  {
+    "id": "low-density-cartridge-heaters",
+    "slug": "low-density-cartridge-heaters",
+    "name": "Low Density Cartridge Heaters",
+    "category": "cartridge-heaters",
+    "categoryLabel": "Cartridge Heaters",
+    "images": [
+      "/images/originals/low-high-density-cartridge-heaters.jpg",
+      "/images/products/main-image3.jpg"
+    ],
+    "shortDescription": "Economical cartridge heaters for localized heating in dies, moulds and platens.",
+    "fullDescription": "We are renowned manufacturers and suppliers of low density cartridge heaters, which are used for localized heating in dies, moulds, platens, packing machinery and all other types of process machinery.",
+    "specs": [
+      {
+        "label": "Sheath",
+        "value": "SS304 / Brass"
+      },
+      {
+        "label": "Element",
+        "value": "Nickel-Chrome wire"
+      },
+      {
+        "label": "Diameter / Wattage / Voltage",
+        "value": "Any, as required"
+      }
+    ],
+    "features": [
+      "Available in SS304 and Brass sheath",
+      "Uniform heat distribution",
+      "Made with nickel-chrome wire",
+      "Most economical",
+      "Available in any diameter, wattage and voltage"
+    ],
+    "applications": [
+      "Shoe Making Machinery",
+      "Injection and Blow Moulding",
+      "Packaging Machinery",
+      "Processing Machinery",
+      "Extruders",
+      "Hot Plates, Moulds and Dies",
+      "Heating of Manifolds",
+      "Food Processing Units"
+    ],
+    "keywords": [
+      "low watt cartridge",
+      "brass cartridge heater",
+      "SS cartridge heater",
+      "cartridge heater",
+      "catridge heater",
+      "cartrige heater",
+      "pencil heater",
+      "rod heater",
+      "insertion heater",
+      "mould heater",
+      "die heater",
+      "finger heater"
+    ],
+    "relatedProducts": [
+      "high-density-cartridge-heaters",
+      "split-type-cartridge-heaters",
+      "ceramic-cartridge-heaters"
+    ]
+  },
+  {
+    "id": "high-density-cartridge-heaters",
+    "slug": "high-density-cartridge-heaters",
+    "name": "High Density Cartridge Heaters",
+    "category": "cartridge-heaters",
+    "categoryLabel": "Cartridge Heaters",
+    "images": [
+      "/images/originals/61.jpg",
+      "/images/products/cartridgeheaters3.jpg"
+    ],
+    "shortDescription": "Swaged, high watt density cartridges — among the most versatile heaters in manufacturing.",
+    "fullDescription": "High density cartridge heaters are among the most versatile and widely used cartridge heaters throughout the manufacturing industries.",
+    "specs": [
+      {
+        "label": "Sheath",
+        "value": "SS304 / SS316"
+      },
+      {
+        "label": "Insulation",
+        "value": "High purity MgO"
+      },
+      {
+        "label": "Construction",
+        "value": "Swaged"
+      },
+      {
+        "label": "Diameter / Wattage / Voltage",
+        "value": "Any, as required"
+      }
+    ],
+    "features": [
+      "Available in SS304 and SS316 outer sheath",
+      "Designed for high watt density",
+      "High purity MgO insulation assures high dielectric strength and fast heat transfer",
+      "Swaging increases thermal conductivity and uniform heat transfer",
+      "Shock and vibration resistant",
+      "Available in any diameter, wattage and voltage"
+    ],
+    "applications": [
+      "Packaging Machinery",
+      "Dies and Moulds",
+      "Food Processing Units",
+      "Plastic and Polymer Processing Units",
+      "Hot Runner Bushings",
+      "Shoe Making Units"
+    ],
+    "keywords": [
+      "high watt cartridge",
+      "swaged cartridge heater",
+      "HD cartridge heater",
+      "cartridge heater",
+      "catridge heater",
+      "cartrige heater",
+      "pencil heater",
+      "rod heater",
+      "insertion heater",
+      "mould heater",
+      "die heater",
+      "finger heater"
+    ],
+    "relatedProducts": [
+      "low-density-cartridge-heaters",
+      "split-type-cartridge-heaters",
+      "ceramic-cartridge-heaters"
+    ]
+  },
+  {
+    "id": "split-type-cartridge-heaters",
+    "slug": "split-type-cartridge-heaters",
+    "name": "Split Type Cartridge Heaters",
+    "category": "cartridge-heaters",
+    "categoryLabel": "Cartridge Heaters",
+    "images": [
+      "/images/originals/64.jpg"
+    ],
+    "shortDescription": "Easy-to-fix split sheath cartridges that pack maximum watts into a small length.",
+    "fullDescription": "Split type cartridge heaters in SS304 and SS316 sheaths, designed as per customer specification for uniform heat transfer and easy fixing.",
+    "specs": [
+      {
+        "label": "Sheath",
+        "value": "SS304 / SS316"
+      },
+      {
+        "label": "Design",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [
+      "Available in SS304 and SS316 sheath",
+      "Uniform heat transfer",
+      "Easy to fix",
+      "High dielectric strength",
+      "Maximum watts accommodated in small length",
+      "Designed as per customer specification",
+      "Longer life"
+    ],
+    "applications": [
+      "Die Core Machines",
+      "Packaging Machinery",
+      "Injection and Blow Moulding Machines",
+      "Extruders",
+      "Foundry",
+      "Plastic Processing Machines"
+    ],
+    "keywords": [
+      "split cartridge",
+      "split sheath heater",
+      "expandable cartridge heater",
+      "cartridge heater",
+      "catridge heater",
+      "cartrige heater",
+      "pencil heater",
+      "rod heater",
+      "insertion heater",
+      "mould heater",
+      "die heater",
+      "finger heater"
+    ],
+    "relatedProducts": [
+      "low-density-cartridge-heaters",
+      "high-density-cartridge-heaters",
+      "ceramic-cartridge-heaters"
+    ]
+  },
+  {
+    "id": "ceramic-cartridge-heaters",
+    "slug": "ceramic-cartridge-heaters",
+    "name": "Ceramic Cartridge Heaters",
+    "category": "cartridge-heaters",
+    "categoryLabel": "Cartridge Heaters",
+    "images": [
+      "/images/originals/ceramic-heaters.jpg"
+    ],
+    "shortDescription": "Ceramic-bodied heaters for dryers, ovens and printing machines.",
+    "fullDescription": "Ceramic cartridge heaters for dryers, ovens, printing and packaging machines, built to customer requirements.",
+    "specs": [
+      {
+        "label": "Design",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [],
+    "applications": [
+      "Dryers",
+      "Ovens",
+      "Printing Machines",
+      "Packaging Machines"
+    ],
+    "keywords": [
+      "ceramic heater",
+      "ceramic bead heater",
+      "bobbin heater",
+      "porcelain heater",
+      "ceramic core heater",
+      "cartridge heater",
+      "catridge heater",
+      "cartrige heater",
+      "pencil heater",
+      "rod heater",
+      "insertion heater",
+      "mould heater",
+      "die heater",
+      "finger heater"
+    ],
+    "relatedProducts": [
+      "low-density-cartridge-heaters",
+      "high-density-cartridge-heaters",
+      "split-type-cartridge-heaters"
+    ]
+  },
+  {
+    "id": "mica-band-heaters",
+    "slug": "mica-band-heaters",
+    "name": "Mica Band Heaters",
+    "category": "band-heaters",
+    "categoryLabel": "Band Heaters",
+    "images": [
+      "/images/originals/mica-band-heaters.jpg",
+      "/images/products/bandheater1.jpg"
+    ],
+    "shortDescription": "The most economical band heater, with excellent dielectric strength.",
+    "fullDescription": "Mica band heaters are widely used to heat moulds, dies and nozzles. They are the most economical compared with other heaters and provide excellent thermal conductivity, as heat transfers by conduction.",
+    "specs": [
+      {
+        "label": "Heat Transfer",
+        "value": "Conduction"
+      },
+      {
+        "label": "Holes & Cutouts",
+        "value": "Customizable"
+      }
+    ],
+    "features": [
+      "Most economical",
+      "Holes and cutouts can be customized",
+      "Excellent dielectric strength"
+    ],
+    "applications": [
+      "Plastic Industries",
+      "Moulding Machines (Injection and Blow Moulding)",
+      "Barrels and Dies",
+      "Rubber Industries",
+      "Extruders"
+    ],
+    "keywords": [
+      "mica heater",
+      "mica band",
+      "mica nozzle heater",
+      "band heater",
+      "barrel heater",
+      "clamp heater",
+      "extruder heater",
+      "injection moulding heater",
+      "collar heater",
+      "bend heater"
+    ],
+    "relatedProducts": [
+      "ceramic-band-heaters",
+      "brass-sealed-mica-band-heaters"
+    ]
+  },
+  {
+    "id": "ceramic-band-heaters",
+    "slug": "ceramic-band-heaters",
+    "name": "Ceramic Band Heaters",
+    "category": "band-heaters",
+    "categoryLabel": "Band Heaters",
+    "images": [
+      "/images/originals/59.jpg",
+      "/images/products/bandheater4.jpg"
+    ],
+    "shortDescription": "Steatite ceramic band heaters with built-in insulation for power saving.",
+    "fullDescription": "Our ceramic band heaters are fitted with nickel-chrome resistance wire to ensure long-term performance and reduce power consumption. We use special steatite ceramic for high thermal conductivity, and the outer sheath is made of SS304.",
+    "specs": [
+      {
+        "label": "Operating Temperature",
+        "value": "Up to 300°C"
+      },
+      {
+        "label": "Element",
+        "value": "Nickel-Chrome resistance wire"
+      },
+      {
+        "label": "Insulation",
+        "value": "Steatite ceramic"
+      },
+      {
+        "label": "Outer Sheath",
+        "value": "SS304"
+      },
+      {
+        "label": "Terminal Leads",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [
+      "Built-in thermal insulation for power saving",
+      "Longer life",
+      "Easy installation",
+      "Uniform temperature",
+      "Holes and cutout arrangements can be customized",
+      "Output terminal leads as per customer specification",
+      "Higher operating temperature up to 300°C",
+      "Leak proof"
+    ],
+    "applications": [
+      "Plastic Industries",
+      "Injection and Blow Moulding Machinery",
+      "Barrels and Dies",
+      "Blown Film",
+      "Rubber Machinery",
+      "Extruders"
+    ],
+    "keywords": [
+      "ceramic band",
+      "ceramic barrel heater",
+      "ceramic heater",
+      "band heater",
+      "barrel heater",
+      "clamp heater",
+      "extruder heater",
+      "injection moulding heater",
+      "collar heater",
+      "bend heater"
+    ],
+    "relatedProducts": [
+      "mica-band-heaters",
+      "brass-sealed-mica-band-heaters"
+    ]
+  },
+  {
+    "id": "brass-sealed-mica-band-heaters",
+    "slug": "brass-sealed-mica-band-heaters",
+    "name": "Brass Sealed Mica Band Heaters",
+    "category": "band-heaters",
+    "categoryLabel": "Band Heaters",
+    "images": [
+      "/images/products/bandheater5.jpg",
+      "/images/products/bandheater6.jpg",
+      "/images/products/main-image9.jpg"
+    ],
+    "shortDescription": "Mica band heaters sealed in a brass sheath for nozzles and small barrels.",
+    "fullDescription": "Mica band heaters sealed in a brass outer sheath, made to the size, wattage and voltage you need.",
+    "specs": [
+      {
+        "label": "Outer Sheath",
+        "value": "Brass"
+      },
+      {
+        "label": "Insulation",
+        "value": "Mica"
+      },
+      {
+        "label": "Size / Wattage / Voltage",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "brass band heater",
+      "brass nozzle heater",
+      "sealed band heater",
+      "brass heater",
+      "band heater",
+      "barrel heater",
+      "clamp heater",
+      "extruder heater",
+      "injection moulding heater",
+      "collar heater",
+      "bend heater"
+    ],
+    "relatedProducts": [
+      "mica-band-heaters",
+      "ceramic-band-heaters"
+    ]
+  },
+  {
+    "id": "spring-coil-heaters",
+    "slug": "spring-coil-heaters",
+    "name": "Spring Coil Heaters",
+    "category": "coil-heaters",
+    "categoryLabel": "Coil Heaters",
+    "images": [
+      "/images/originals/37-mask.jpg",
+      "/images/products/coilheaters4.jpg",
+      "/images/products/main-image5.jpg",
+      "/images/originals/41.jpg"
+    ],
+    "shortDescription": "Open-pitch coil heaters that stretch over nozzles and round parts.",
+    "fullDescription": "Coil heaters have a small diameter but great heating power. They are particularly suitable for hot runner systems in the plastic industry and many other thermal processes where high electrical heating performance is required in the tightest of spaces. Coil heaters can be wound or bent to nearly any geometric form, so they adapt closely to the surfaces being heated.",
+    "specs": [
+      {
+        "label": "Operating Temperature",
+        "value": "450°C"
+      },
+      {
+        "label": "Standard Sizes",
+        "value": "3 x 3 mm, 3.3 x 3.3 mm, 2.2 x 4.2 mm"
+      },
+      {
+        "label": "Thermocouple",
+        "value": "J or K type"
+      },
+      {
+        "label": "Sleeve Option",
+        "value": "Inner & outer SS cover"
+      }
+    ],
+    "features": [
+      "Operating temperature 450°C",
+      "Readily conforms to surface",
+      "High thermal conductivity",
+      "Fast response and quick heat transfer",
+      "Longer heater life",
+      "Also available with inner & outer SS cover (sleeve type) for even heat distribution",
+      "Standard sizes: square 3 x 3 mm, 3.3 x 3.3 mm, 2.2 x 4.2 mm",
+      "Available with J or K type thermocouple for high resolution temperature"
+    ],
+    "applications": [
+      "Moulds and Dies",
+      "Hot Runner Nozzles",
+      "Injection Moulding Machines"
+    ],
+    "keywords": [
+      "spring heater",
+      "open coil heater",
+      "spiral coil heater",
+      "coil heater",
+      "nozzle coil",
+      "hot runner coil",
+      "micro coil heater",
+      "coil element",
+      "coil hetar"
+    ],
+    "relatedProducts": [
+      "compact-coil-heaters"
+    ]
+  },
+  {
+    "id": "compact-coil-heaters",
+    "slug": "compact-coil-heaters",
+    "name": "Compact Coil Heaters",
+    "category": "coil-heaters",
+    "categoryLabel": "Coil Heaters",
+    "images": [
+      "/images/originals/57.jpg",
+      "/images/products/coilheaters2.jpg"
+    ],
+    "shortDescription": "Tightly wound coil heaters for maximum power in a short length.",
+    "fullDescription": "Coil heaters have a small diameter but great heating power. They are particularly suitable for hot runner systems in the plastic industry and many other thermal processes where high electrical heating performance is required in the tightest of spaces. Coil heaters can be wound or bent to nearly any geometric form, so they adapt closely to the surfaces being heated.",
+    "specs": [
+      {
+        "label": "Operating Temperature",
+        "value": "450°C"
+      },
+      {
+        "label": "Standard Sizes",
+        "value": "3 x 3 mm, 3.3 x 3.3 mm, 2.2 x 4.2 mm"
+      },
+      {
+        "label": "Thermocouple",
+        "value": "J or K type"
+      },
+      {
+        "label": "Sleeve Option",
+        "value": "Inner & outer SS cover"
+      }
+    ],
+    "features": [
+      "Operating temperature 450°C",
+      "Readily conforms to surface",
+      "High thermal conductivity",
+      "Fast response and quick heat transfer",
+      "Longer heater life",
+      "Also available with inner & outer SS cover (sleeve type) for even heat distribution",
+      "Standard sizes: square 3 x 3 mm, 3.3 x 3.3 mm, 2.2 x 4.2 mm",
+      "Available with J or K type thermocouple for high resolution temperature"
+    ],
+    "applications": [
+      "Moulds and Dies",
+      "Hot Runner Nozzles",
+      "Injection Moulding Machines"
+    ],
+    "keywords": [
+      "tight coil heater",
+      "closed coil heater",
+      "mini coil heater",
+      "coil heater",
+      "spring heater",
+      "nozzle coil",
+      "hot runner coil",
+      "micro coil heater",
+      "coil element",
+      "coil hetar"
+    ],
+    "relatedProducts": [
+      "spring-coil-heaters"
+    ]
+  },
+  {
+    "id": "sleeve-type-coil-heaters",
+    "slug": "sleeve-type-coil-heaters",
+    "name": "Sleeve Type Coil Heaters",
+    "category": "hot-runner-heaters",
+    "categoryLabel": "Hot Runner Heaters",
+    "images": [
+      "/images/originals/56.jpg",
+      "/images/originals/77.jpg",
+      "/images/products/main-image1.jpg"
+    ],
+    "shortDescription": "Coil heaters sealed in a stainless steel sleeve for hot runner nozzles.",
+    "fullDescription": "Sleeve type coil heaters for hot runner nozzles, with a stainless steel sleeve for even heat distribution around the nozzle.",
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Sleeve type coil heater"
+      },
+      {
+        "label": "Size",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [],
+    "applications": [
+      "Hot Runner Nozzles",
+      "Injection Moulding Machines"
+    ],
+    "keywords": [
+      "sleeve heater",
+      "nozzle sleeve heater",
+      "copper sleeve heater",
+      "SS sleeve heater",
+      "hot runner heater",
+      "nozzle heater",
+      "hot runner nozzle",
+      "injection mould nozzle heater"
+    ],
+    "relatedProducts": [
+      "hot-runner-nozzle-with-coil-heater"
+    ]
+  },
+  {
+    "id": "hot-runner-nozzle-with-coil-heater",
+    "slug": "hot-runner-nozzle-with-coil-heater",
+    "name": "Hot Runner Nozzle with Coil Heater",
+    "category": "hot-runner-heaters",
+    "categoryLabel": "Hot Runner Heaters",
+    "images": [
+      "/images/originals/55.jpg"
+    ],
+    "shortDescription": "Hot runner nozzle supplied with a fitted coil heater and thermocouple.",
+    "fullDescription": "A complete hot runner nozzle with a coil heater and thermocouple fitted, ready to install in the mould.",
+    "specs": [
+      {
+        "label": "Size / Wattage / Voltage",
+        "value": "As per customer specification"
+      }
+    ],
+    "features": [],
+    "applications": [
+      "Hot Runner Systems",
+      "Injection Moulding Machines"
+    ],
+    "keywords": [
+      "hot runner nozzle",
+      "nozzle tip heater",
+      "injection nozzle",
+      "mould nozzle",
+      "hot runner heater",
+      "nozzle heater",
+      "sleeve heater",
+      "injection mould nozzle heater"
+    ],
+    "relatedProducts": [
+      "sleeve-type-coil-heaters"
+    ]
+  },
+  {
+    "id": "manifold-heaters",
+    "slug": "manifold-heaters",
+    "name": "Manifold Heaters",
+    "category": "manifold-heaters",
+    "categoryLabel": "Manifold Heaters",
+    "images": [
+      "/images/products/mainfoldheater1.jpg",
+      "/images/products/main-image6.jpg"
+    ],
+    "shortDescription": "Easy-to-bend heaters shaped to your manifold for balanced melt flow.",
+    "fullDescription": "In hot runner systems, temperature uniformity is critical to ensure balanced melt flow for part-to-part consistency and to prevent runner obstructions and material degradation. Processors also gain production efficiency from the precise thermal profile, along with shorter cycle times, less material scrap and lower overall system costs.",
+    "specs": [
+      {
+        "label": "Sheath Diameter",
+        "value": "6 mm, 6.5 mm, 7 mm, 8 mm, 8.5 mm"
+      },
+      {
+        "label": "Shape",
+        "value": "As per customer requirement"
+      }
+    ],
+    "features": [
+      "Outer sheath diameters of 6 mm, 6.5 mm, 7 mm, 8 mm and 8.5 mm",
+      "Shape as per customer requirement",
+      "Easy to bend",
+      "Efficient heat transfer"
+    ],
+    "applications": [
+      "Hot Runner Systems",
+      "Moulds and Dies"
+    ],
+    "keywords": [
+      "manifold element",
+      "bent manifold heater",
+      "manifold heater",
+      "mainfold heater",
+      "hot runner manifold",
+      "bent tubular heater"
+    ],
+    "relatedProducts": [
+      "manifold-plate-heaters"
+    ]
+  },
+  {
+    "id": "manifold-plate-heaters",
+    "slug": "manifold-plate-heaters",
+    "name": "Manifold Plate with Pressed-in Heater",
+    "category": "manifold-heaters",
+    "categoryLabel": "Manifold Heaters",
+    "images": [
+      "/images/originals/42.jpg"
+    ],
+    "shortDescription": "Manifold heater pressed into the grooves of a hot runner manifold plate.",
+    "fullDescription": "A manifold heater bent to the groove profile and pressed into the hot runner manifold plate for uniform melt temperature.",
+    "specs": [
+      {
+        "label": "Sheath Diameter",
+        "value": "6 mm, 6.5 mm, 7 mm, 8 mm, 8.5 mm"
+      },
+      {
+        "label": "Shape",
+        "value": "As per customer requirement"
+      }
+    ],
+    "features": [
+      "Outer sheath diameters of 6 mm, 6.5 mm, 7 mm, 8 mm and 8.5 mm",
+      "Shape as per customer requirement",
+      "Easy to bend",
+      "Efficient heat transfer"
+    ],
+    "applications": [
+      "Hot Runner Systems",
+      "Moulds and Dies"
+    ],
+    "keywords": [
+      "manifold block heater",
+      "grooved plate heater",
+      "hot runner plate",
+      "manifold heater",
+      "mainfold heater",
+      "hot runner manifold",
+      "bent tubular heater",
+      "manifold element"
+    ],
+    "relatedProducts": [
+      "manifold-heaters"
+    ]
+  },
+  {
+    "id": "short-wave-infrared-heaters",
+    "slug": "short-wave-infrared-heaters",
+    "name": "Short Wave Infrared Heaters",
+    "category": "glass-heaters",
+    "categoryLabel": "Glass Heaters",
+    "images": [
+      "/images/originals/67.jpg"
+    ],
+    "shortDescription": "The fastest form of heat — short wave IR emitters for demanding applications.",
+    "fullDescription": "Infrared heat is transmitted directly as electromagnetic rays at approximately 300,000 km/sec — the speed of light. It is therefore not only the fastest form of heat but is also suitable for demanding applications such as vacuum technology and clean room conditions. Infrared heat is particularly economical on energy because it acts quickly and directly on products.",
+    "specs": [
+      {
+        "label": "Holder Options",
+        "value": "Small round ceramic cap / Big round ceramic cap / Tall rod type holder / Rectangular ceramic cap"
+      }
+    ],
+    "features": [],
+    "applications": [
+      "PET Preform Heating in Stretch Blow Moulding",
+      "Paint Booths",
+      "Rubber Coating Drying",
+      "Soldering & Fusing in PCB Industries",
+      "Printing Ink Drying in Offset Machines",
+      "Powder Coating Curing",
+      "Paper Coating Drying",
+      "All Types of Lamination",
+      "Screen Printing Curing on T-Shirts and Textiles"
+    ],
+    "keywords": [
+      "short wave IR",
+      "halogen lamp",
+      "twin tube IR",
+      "IR emitter",
+      "PET preform heater",
+      "infrared heater",
+      "IR heater",
+      "IR lamp",
+      "glass heater",
+      "quartz heater",
+      "halogen heater",
+      "infra red heater",
+      "radiant heater",
+      "drying lamp"
+    ],
+    "relatedProducts": [
+      "ceramic-infrared-heaters",
+      "medium-wave-quartz-infrared-heaters",
+      "quartz-infrared-heater-modules"
+    ]
+  },
+  {
+    "id": "ceramic-infrared-heaters",
+    "slug": "ceramic-infrared-heaters",
+    "name": "Ceramic Infrared Heaters",
+    "category": "glass-heaters",
+    "categoryLabel": "Glass Heaters",
+    "images": [
+      "/images/originals/glass-heaters.jpg",
+      "/images/products/glassheaters2.jpg"
+    ],
+    "shortDescription": "Glazed ceramic emitters with a firmly burnt-in coil for high radiant efficiency.",
+    "fullDescription": "Our ceramic infrared heaters are designed to produce maximum heat output. They are built with a firmly burnt-in heating coil of highly heat-proof resistance wire. Longer service life is achieved because the heater resistance stays constant over the whole temperature range, and the glaze has excellent radiation properties for very high radiant efficiency.",
+    "specs": [
+      {
+        "label": "Full Length Model",
+        "value": "244 x 60 mm, 100 – 250 W"
+      },
+      {
+        "label": "Half Length Model",
+        "value": "122 x 60 mm, 50 – 125 W"
+      }
+    ],
+    "features": [],
+    "applications": [
+      "Thermoforming and Vacuum Forming Machines",
+      "PVC Pipe Belling / Socket Machines",
+      "Hot Stamping Machines",
+      "Shrink Packaging"
+    ],
+    "keywords": [
+      "ceramic IR heater",
+      "ceramic emitter",
+      "thermoforming heater",
+      "FSR heater",
+      "ceramic infrared panel",
+      "infrared heater",
+      "IR heater",
+      "IR lamp",
+      "glass heater",
+      "quartz heater",
+      "halogen heater",
+      "infra red heater",
+      "radiant heater",
+      "drying lamp"
+    ],
+    "relatedProducts": [
+      "short-wave-infrared-heaters",
+      "medium-wave-quartz-infrared-heaters",
+      "quartz-infrared-heater-modules"
+    ]
+  },
+  {
+    "id": "medium-wave-quartz-infrared-heaters",
+    "slug": "medium-wave-quartz-infrared-heaters",
+    "name": "Medium Wave Quartz Infrared Heaters",
+    "category": "glass-heaters",
+    "categoryLabel": "Glass Heaters",
+    "images": [
+      "/images/products/glassheaters5.jpg",
+      "/images/products/main-image4.jpg"
+    ],
+    "shortDescription": "Quartz infrared heaters in 8–19 mm diameters and 300–1500 mm lengths.",
+    "fullDescription": "Medium wave quartz infrared glass heaters, fitted with a specially designed heating coil to ensure longer life with low maintenance.",
+    "specs": [
+      {
+        "label": "Diameter",
+        "value": "8 mm, 10 mm, 12 mm, 15 mm, 19 mm"
+      },
+      {
+        "label": "Length",
+        "value": "300 mm to 1500 mm"
+      },
+      {
+        "label": "Mounting",
+        "value": "Horizontal position only"
+      }
+    ],
+    "features": [
+      "Available in diameters of 8, 10, 12, 15 and 19 mm",
+      "Available in lengths from 300 mm to 1500 mm",
+      "Can be used only in horizontal position",
+      "Specially designed heating coil for longer life",
+      "Low maintenance"
+    ],
+    "applications": [
+      "Shrink Packaging Machines",
+      "Lamination Industries",
+      "Drying Textiles",
+      "Curing Rubber"
+    ],
+    "keywords": [
+      "quartz heater",
+      "quartz tube heater",
+      "medium wave IR",
+      "quartz infrared",
+      "infrared heater",
+      "IR heater",
+      "IR lamp",
+      "glass heater",
+      "halogen heater",
+      "infra red heater",
+      "radiant heater",
+      "drying lamp"
+    ],
+    "relatedProducts": [
+      "short-wave-infrared-heaters",
+      "ceramic-infrared-heaters",
+      "quartz-infrared-heater-modules"
+    ]
+  },
+  {
+    "id": "quartz-infrared-heater-modules",
+    "slug": "quartz-infrared-heater-modules",
+    "name": "Quartz Infrared Heater Modules",
+    "category": "glass-heaters",
+    "categoryLabel": "Glass Heaters",
+    "images": [
+      "/images/products/glassheaters3.jpg"
+    ],
+    "shortDescription": "Quartz infrared tubes mounted in a ready-to-fit housing.",
+    "fullDescription": "Quartz infrared heating tubes assembled in a metal housing with reflector, ready to mount in drying and curing lines.",
+    "specs": [
+      {
+        "label": "Diameter",
+        "value": "8 mm, 10 mm, 12 mm, 15 mm, 19 mm"
+      },
+      {
+        "label": "Length",
+        "value": "300 mm to 1500 mm"
+      },
+      {
+        "label": "Mounting",
+        "value": "Horizontal position only"
+      }
+    ],
+    "features": [
+      "Available in diameters of 8, 10, 12, 15 and 19 mm",
+      "Available in lengths from 300 mm to 1500 mm",
+      "Can be used only in horizontal position",
+      "Specially designed heating coil for longer life",
+      "Low maintenance"
+    ],
+    "applications": [
+      "Shrink Packaging Machines",
+      "Lamination Industries",
+      "Drying Textiles",
+      "Curing Rubber"
+    ],
+    "keywords": [
+      "IR panel",
+      "infrared panel",
+      "quartz IR module",
+      "IR module",
+      "drying panel",
+      "infrared heater",
+      "IR heater",
+      "IR lamp",
+      "glass heater",
+      "quartz heater",
+      "halogen heater",
+      "infra red heater",
+      "radiant heater",
+      "drying lamp"
+    ],
+    "relatedProducts": [
+      "short-wave-infrared-heaters",
+      "ceramic-infrared-heaters",
+      "medium-wave-quartz-infrared-heaters"
+    ]
+  },
+  {
+    "id": "silica-glass-heaters",
+    "slug": "silica-glass-heaters",
+    "name": "Silica Glass Heaters",
+    "category": "glass-heaters",
+    "categoryLabel": "Glass Heaters",
+    "images": [
+      "/images/originals/slica-glass-heater.jpg"
+    ],
+    "shortDescription": "Silica glass heaters made to your length, wattage and voltage.",
+    "fullDescription": "We manufacture silica glass heaters to customer specifications of length, wattage and voltage. The outer diameter of the glass is standard from 25 mm to 50 mm, and the non-heating area is available as per customer requirement.",
+    "specs": [
+      {
+        "label": "Outer Diameter",
+        "value": "25 mm to 50 mm"
+      },
+      {
+        "label": "Length / Wattage / Voltage",
+        "value": "As per customer specification"
+      },
+      {
+        "label": "Non-heating Area",
+        "value": "As per customer requirement"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "silica heater",
+      "quartz immersion heater",
+      "acid immersion heater",
+      "electroplating heater",
+      "infrared heater",
+      "IR heater",
+      "IR lamp",
+      "glass heater",
+      "quartz heater",
+      "halogen heater",
+      "infra red heater",
+      "radiant heater",
+      "drying lamp"
+    ],
+    "relatedProducts": [
+      "short-wave-infrared-heaters",
+      "ceramic-infrared-heaters",
+      "medium-wave-quartz-infrared-heaters"
+    ]
+  },
+  {
+    "id": "head-type-thermocouples",
+    "slug": "head-type-thermocouples",
+    "name": "Head Type Thermocouples",
+    "category": "thermocouples",
+    "categoryLabel": "Thermocouples",
+    "images": [
+      "/images/products/thermocouples1.jpg"
+    ],
+    "shortDescription": "Thermocouples with a terminal head for industrial process measurement.",
+    "fullDescription": "Thermocouple probes fitted with a connection head, used for industrial furnaces, ovens and process lines.",
+    "specs": [
+      {
+        "label": "Types",
+        "value": "J, K, R, S, N"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "thermocouple with head",
+      "industrial thermocouple",
+      "furnace thermocouple",
+      "RTD",
+      "PT100",
+      "thermocouple",
+      "thermo couple",
+      "thermocupal",
+      "temperature sensor",
+      "temp sensor",
+      "TC sensor",
+      "probe",
+      "J type",
+      "K type",
+      "sensor"
+    ],
+    "relatedProducts": [
+      "mi-thermocouples",
+      "bayonet-thermocouples",
+      "washer-nozzle-thermocouples"
+    ]
+  },
+  {
+    "id": "mi-thermocouples",
+    "slug": "mi-thermocouples",
+    "name": "MI Thermocouples with Braided Cable",
+    "category": "thermocouples",
+    "categoryLabel": "Thermocouples",
+    "images": [
+      "/images/originals/66.jpg",
+      "/images/products/thermocouples2.jpg"
+    ],
+    "shortDescription": "Mineral insulated thermocouple probes with stainless steel braided lead.",
+    "fullDescription": "Mineral insulated (MI) thermocouple probes with a stainless steel braided cable for rugged machine use.",
+    "specs": [
+      {
+        "label": "Types",
+        "value": "J, K, R, S, N"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "MI thermocouple",
+      "mineral insulated thermocouple",
+      "braided thermocouple",
+      "probe thermocouple",
+      "thermocouple",
+      "thermo couple",
+      "thermocupal",
+      "temperature sensor",
+      "temp sensor",
+      "TC sensor",
+      "probe",
+      "J type",
+      "K type",
+      "sensor"
+    ],
+    "relatedProducts": [
+      "head-type-thermocouples",
+      "bayonet-thermocouples",
+      "washer-nozzle-thermocouples"
+    ]
+  },
+  {
+    "id": "bayonet-thermocouples",
+    "slug": "bayonet-thermocouples",
+    "name": "Bayonet & Threaded Thermocouples",
+    "category": "thermocouples",
+    "categoryLabel": "Thermocouples",
+    "images": [
+      "/images/products/thermocouples3.jpg",
+      "/images/products/thermocouples4.jpg",
+      "/images/products/thermocouples5.jpg"
+    ],
+    "shortDescription": "Spring-loaded bayonet and screw-in threaded thermocouples for barrels and moulds.",
+    "fullDescription": "Bayonet-cap thermocouples with a spring-loaded probe for quick, firm fitting, and threaded thermocouples that screw directly into the machine or mould.",
+    "specs": [
+      {
+        "label": "Types",
+        "value": "J, K, R, S, N"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "bayonet thermocouple",
+      "spring thermocouple",
+      "barrel thermocouple",
+      "thermocouple",
+      "thermo couple",
+      "thermocupal",
+      "temperature sensor",
+      "temp sensor",
+      "TC sensor",
+      "probe",
+      "J type",
+      "K type",
+      "sensor",
+      "screw thermocouple",
+      "threaded thermocouple",
+      "screw in sensor"
+    ],
+    "relatedProducts": [
+      "head-type-thermocouples",
+      "mi-thermocouples",
+      "bayonet-thermocouples"
+    ]
+  },
+  {
+    "id": "washer-nozzle-thermocouples",
+    "slug": "washer-nozzle-thermocouples",
+    "name": "Washer & Nozzle Thermocouples",
+    "category": "thermocouples",
+    "categoryLabel": "Thermocouples",
+    "images": [
+      "/images/originals/65.jpg",
+      "/images/products/main-image2.jpg"
+    ],
+    "shortDescription": "Ring-washer and nozzle-type thermocouples for surface temperature.",
+    "fullDescription": "Washer (ring) and nozzle type thermocouples that clamp under a bolt or onto a nozzle to measure surface temperature.",
+    "specs": [
+      {
+        "label": "Types",
+        "value": "J, K, R, S, N"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "washer thermocouple",
+      "ring thermocouple",
+      "eyelet thermocouple",
+      "nozzle thermocouple",
+      "surface thermocouple",
+      "thermocouple",
+      "thermo couple",
+      "thermocupal",
+      "temperature sensor",
+      "temp sensor",
+      "TC sensor",
+      "probe",
+      "J type",
+      "K type",
+      "sensor"
+    ],
+    "relatedProducts": [
+      "head-type-thermocouples",
+      "mi-thermocouples",
+      "bayonet-thermocouples"
+    ]
+  },
+  {
+    "id": "4-zone-hot-runner-controller",
+    "slug": "4-zone-hot-runner-controller",
+    "name": "4-Zone Hot Runner Temperature Controller",
+    "category": "temperature-controllers",
+    "categoryLabel": "Temperature Controllers",
+    "images": [
+      "/images/originals/img-9425-copy.jpg",
+      "/images/products/temperaturecontroller1.jpg"
+    ],
+    "shortDescription": "Four-zone temperature control cabinet for hot runner moulds.",
+    "fullDescription": "A four-zone temperature controller cabinet with digital display for each zone, used to control hot runner nozzles and manifolds.",
+    "specs": [
+      {
+        "label": "Zones",
+        "value": "4"
+      },
+      {
+        "label": "Display",
+        "value": "Digital"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "hot runner controller",
+      "4 zone controller",
+      "mould temperature controller",
+      "multi zone controller",
+      "temperature controller",
+      "temp controller",
+      "PID controller",
+      "digital controller",
+      "thermostat",
+      "temperature meter",
+      "controller"
+    ],
+    "relatedProducts": [
+      "6-zone-hot-runner-controller",
+      "digital-temperature-controllers"
+    ]
+  },
+  {
+    "id": "6-zone-hot-runner-controller",
+    "slug": "6-zone-hot-runner-controller",
+    "name": "6-Zone Hot Runner Temperature Controller",
+    "category": "temperature-controllers",
+    "categoryLabel": "Temperature Controllers",
+    "images": [
+      "/images/originals/4.jpg"
+    ],
+    "shortDescription": "Six-zone temperature control cabinet for hot runner moulds.",
+    "fullDescription": "A six-zone temperature controller cabinet with digital display for each zone, used to control hot runner nozzles and manifolds.",
+    "specs": [
+      {
+        "label": "Zones",
+        "value": "6"
+      },
+      {
+        "label": "Display",
+        "value": "Digital"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "hot runner controller",
+      "6 zone controller",
+      "mould temperature controller",
+      "multi zone controller",
+      "temperature controller",
+      "temp controller",
+      "PID controller",
+      "digital controller",
+      "thermostat",
+      "temperature meter",
+      "controller"
+    ],
+    "relatedProducts": [
+      "4-zone-hot-runner-controller",
+      "digital-temperature-controllers"
+    ]
+  },
+  {
+    "id": "digital-temperature-controllers",
+    "slug": "digital-temperature-controllers",
+    "name": "Digital Temperature Controllers",
+    "category": "temperature-controllers",
+    "categoryLabel": "Temperature Controllers",
+    "images": [
+      "/images/originals/47.jpg",
+      "/images/products/temperaturecontroller2.jpg"
+    ],
+    "shortDescription": "Panel-mount digital temperature controllers with heating and cooling control.",
+    "fullDescription": "Backed by our technological excellence and professional manpower, we manufacture and supply digital temperature controllers. Available with heating and cooling control, our temperature controllers offer accurate measurement of temperature.",
+    "specs": [
+      {
+        "label": "Display",
+        "value": "Digital"
+      },
+      {
+        "label": "Control",
+        "value": "Heating and cooling"
+      }
+    ],
+    "features": [],
+    "applications": [],
+    "keywords": [
+      "digital temperature controller",
+      "panel controller",
+      "PID",
+      "temperature indicator",
+      "thermostat",
+      "temperature controller",
+      "temp controller",
+      "PID controller",
+      "digital controller",
+      "temperature meter",
+      "controller"
+    ],
+    "relatedProducts": [
+      "4-zone-hot-runner-controller",
+      "6-zone-hot-runner-controller"
+    ]
   }
 ]

@@ -116,7 +116,7 @@ export default function About() {
           <div className="border border-muted/15 overflow-hidden h-72 sm:h-80 lg:h-[420px] w-full relative bg-white">
             <img
               src={aboutHeroImg}
-              alt="Indus Heaters Industrial Manufacturing Facility"
+              alt="Indus Heaters coil heater close-up"
               style={{ objectPosition: '80% center' }}
               className="w-full h-full object-cover"
             />

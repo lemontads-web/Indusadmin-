@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useCartStore } from '../../store/useCartStore';
 import { ClipboardList, Menu, X, ChevronDown } from 'lucide-react';
 import productsData from '../../data/products.json';
+import allCategories from '../../data/categories';
 import finalLogo from '../../assets/Final logo.png';
 
-const categories = [...new Set(productsData.map((product) => product.categoryLabel))];
-const categoryToSlug = (category) => category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const categories = allCategories.filter((c) => productsData.some((p) => p.category === c.slug));
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -62,12 +62,12 @@ const Navbar = () => {
               <div className="absolute top-full left-0 w-64 bg-white border border-muted/15 border-t-2 border-t-accent shadow-md z-50">
                 {categories.map((cat) => (
                   <Link
-                    key={cat}
-                    to={`/products?category=${categoryToSlug(cat)}`}
+                    key={cat.slug}
+                    to={`/products?category=${cat.slug}`}
                     onClick={() => setProductsOpen(false)}
                     className="block px-5 py-3 text-sm text-primary hover:bg-muted/5 hover:text-accent border-b border-muted/15 last:border-0 font-body transition-colors"
                   >
-                    {cat}
+                    {cat.label}
                   </Link>
                 ))}
                 <Link to="/products" className="block px-5 py-3 text-sm font-light text-accent bg-accent/5 hover:bg-accent hover:text-white transition-colors uppercase tracking-wider font-heading">

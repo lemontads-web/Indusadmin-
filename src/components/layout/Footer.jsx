@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Mail } from 'lucide-react';
 import productsData from '../../data/products.json';
+import allCategories from '../../data/categories';
 import finalLogo from '../../assets/Final logo.png';
 
-const footerCategories = [...new Set(productsData.map((product) => product.categoryLabel))];
-const categoryToSlug = (category) => category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const footerCategories = allCategories.filter((c) => productsData.some((p) => p.category === c.slug));
 
 const Footer = () => {
   return (
@@ -43,8 +43,8 @@ const Footer = () => {
           <h4 className="font-heading text-sm font-light uppercase tracking-widest text-accent mb-5 pb-3 border-b border-muted/15">Product Range</h4>
           <div className="flex flex-col gap-3">
             {footerCategories.map(cat => (
-              <Link key={cat} to={`/products?category=${categoryToSlug(cat)}`} className="text-sm text-primary hover:text-accent hover:translate-x-1 transition-all inline-block font-normal">
-                {cat}
+              <Link key={cat.slug} to={`/products?category=${cat.slug}`} className="text-sm text-primary hover:text-accent hover:translate-x-1 transition-all inline-block font-normal">
+                {cat.label}
               </Link>
             ))}
           </div>

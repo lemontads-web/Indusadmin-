@@ -7,6 +7,7 @@ import ourApproachImg from '../assets/products/5.png';
 
 
 import SectionHeading from '../components/SectionHeading';
+import categories from '../data/categories';
 import StatsBar from '../components/StatsBar';
 import HeroButton from '../components/HeroButton';
 
@@ -15,14 +16,6 @@ const heroImages = Object.entries(heroImageModules)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([, img]) => img);
 
-const categories = [
-  { name: 'Tubular Heaters',       image: '/images/Tubular Heaters 1.jpg',                    slug: 'tubular-heaters',    desc: 'For air, liquid and solid heating — SS304 to Inconel.' },
-  { name: 'Cartridge Heaters',     image: '/images/Low & High Density Cartridge Heaters.jpg', slug: 'cartridge-heaters',  desc: 'High-density swaged construction. Custom dia & wattage.' },
-  { name: 'Band Heaters',          image: '/images/Mica Band Heaters.jpg',                    slug: 'band-heaters',       desc: 'Mica and ceramic variants for extrusion cylinders.' },
-  { name: 'Coil Heaters',          image: '/images/IMG_9425 copy.jpg',                        slug: 'hot-runner',         desc: 'Fast response — J/K thermocouple built-in, 550°C.' },
-  { name: 'Infrared Heaters',      image: '/images/16.jpg',                                   slug: 'infrared-heaters',   desc: 'Ceramic & silica types — 400–1300°C range.' },
-  { name: 'Thermocouples',         image: '/images/15.jpg',                                   slug: 'thermocouples',      desc: 'MI-type in 1mm, 1.5mm, 3mm — customizable length.' },
-];
 
 const industries = [
   'Plastic industry',
@@ -160,7 +153,7 @@ export default function Home() {
                 <div className="aspect-[4/3] w-full bg-white overflow-hidden relative border-b border-muted/15 flex items-center justify-center p-5">
                   <img
                     src={cat.image}
-                    alt={cat.name}
+                    alt={cat.label}
                     className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
@@ -169,7 +162,7 @@ export default function Home() {
                 <div className="p-5 bg-white flex-1 flex flex-col justify-between">
                   <div>
                     <h3 className="font-heading text-xl font-light text-primary tracking-tight group-hover:text-accent transition-colors mb-2">
-                      {cat.name}
+                      {cat.label}
                     </h3>
                     <p className="text-xs text-primary/80 font-normal leading-[1.25]">
                       {cat.desc}
@@ -199,7 +192,7 @@ export default function Home() {
           <div className="order-1 lg:order-2 lg:col-span-7 w-full bg-white relative overflow-hidden group h-64 sm:h-80 lg:h-[480px]">
             <img
               src={ourApproachImg}
-              alt="Indus Heaters Manufacturing Facility"
+              alt="Indus Heaters manifold heater"
               className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
             />
           </div>

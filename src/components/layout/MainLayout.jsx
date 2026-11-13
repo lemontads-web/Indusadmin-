@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
+import WhatsAppFloat from '../WhatsAppFloat';
 
 const MainLayout = ({ children }) => {
   return (
@@ -9,6 +10,7 @@ const MainLayout = ({ children }) => {
         {children}
       </main>
       <Footer />
+      <WhatsAppFloat />
     </div>
   );
 };

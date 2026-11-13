@@ -1,15 +1,17 @@
-import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom';
+import { getCategory } from '../data/categories';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import productsData from '../data/products.json';
 import { useCartStore } from '../store/useCartStore';
-import { ClipboardList, Check, Download, Zap, Shield, ChevronRight, Plus, Minus, UploadCloud, Paperclip } from 'lucide-react';
+import { ClipboardList, Check, Zap, Shield, ChevronRight, Plus, Minus, UploadCloud, Paperclip } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
+import WhatsAppIcon from '../components/WhatsAppIcon';
+import { whatsappLink, productEnquiryMessage } from '../utils/whatsapp';
 
-const categoryToSlug = (category) => category ? category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
 export default function ProductDetail() {
-  const { productSlug } = useParams();
+  const { productSlug, categorySlug } = useParams();
   const product = productsData.find(p => p.slug === productSlug);
   const addItem = useCartStore(state => state.addItem);
   const [added, setAdded] = useState(false);
@@ -17,7 +19,43 @@ export default function ProductDetail() {
   const [measurements, setMeasurements] = useState({});
   const [attachments, setAttachments] = useState([]);
   const [note, setNote] = useState('');
+  const [activeImage, setActiveImage] = useState(0);
+  const [shownSlug, setShownSlug] = useState(productSlug);
+  if (shownSlug !== productSlug) {
+    setShownSlug(productSlug);
+    setActiveImage(0);
+  }
   const measurementLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+  // Page title + meta tags so search engines and browser tabs show the product name and common keywords
+  useEffect(() => {
+    if (!product) return undefined;
+    const previousTitle = document.title;
+    document.title = `${product.name} | ${product.categoryLabel} | Indus Heaters`;
+    const setMeta = (name, content) => {
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      const previous = tag.getAttribute('content');
+      tag.setAttribute('content', content);
+      return () => (previous === null ? tag.remove() : tag.setAttribute('content', previous));
+    };
+    const restoreDescription = setMeta('description', `${product.name} by Indus Heaters, Chennai. ${product.shortDescription}`);
+    const restoreKeywords = setMeta('keywords', [product.name, product.categoryLabel, ...(product.keywords || [])].join(', '));
+    return () => {
+      document.title = previousTitle;
+      restoreDescription();
+      restoreKeywords();
+    };
+  }, [product]);
+
+  if (!product && getCategory(categorySlug)) {
+    // Old product address (e.g. before products were split) → show its category instead
+    return <Navigate to={`/products?category=${categorySlug}`} replace />;
+  }
 
   if (!product) {
     return (
@@ -50,7 +88,10 @@ export default function ProductDetail() {
     setTimeout(() => setAdded(false), 2500);
   };
 
-  const related = productsData.filter(p => p.relatedProducts?.includes(product.slug)).slice(0, 3);
+  const related = (product.relatedProducts || [])
+    .map((slug) => productsData.find((p) => p.slug === slug))
+    .filter(Boolean)
+    .slice(0, 3);
 
   return (
     <div className="bg-white text-primary font-heading font-light">
@@ -62,7 +103,7 @@ export default function ProductDetail() {
           <ChevronRight className="w-3 h-3 opacity-40" />
           <Link to="/products" className="hover:text-accent transition-colors">Catalogue</Link>
           <ChevronRight className="w-3 h-3 opacity-40" />
-          <Link to={`/products?category=${categoryToSlug(product.categoryLabel)}`} className="hover:text-accent transition-colors">{product.categoryLabel}</Link>
+          <Link to={`/products?category=${product.category}`} className="hover:text-accent transition-colors">{product.categoryLabel}</Link>
           <ChevronRight className="w-3 h-3 opacity-40" />
           <span className="text-accent">{product.name}</span>
         </div>
@@ -78,7 +119,8 @@ export default function ProductDetail() {
             <div className="absolute top-0 left-0 w-full h-[1px] bg-muted/15" />
 
             <motion.img
-              src={product.images[0]}
+              key={product.images[activeImage] || product.images[0]}
+              src={product.images[activeImage] || product.images[0]}
               alt={product.name}
               className="w-full max-h-[70vh] object-contain relative z-10 drop-shadow-md"
               initial={{ opacity: 0, scale: 0.98 }}
@@ -87,9 +129,28 @@ export default function ProductDetail() {
             />
             
             <div className="absolute bottom-4 right-6 font-heading text-[9px] text-primary uppercase tracking-[0.3em] font-light">
-               Render: Indus v4.2
+               {product.images.length > 1 ? `${activeImage + 1} / ${product.images.length}` : 'Indus Heaters'}
             </div>
           </div>
+
+          {product.images.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto py-4 border-b border-muted/15" role="list" aria-label={`${product.name} photos`}>
+              {product.images.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setActiveImage(i)}
+                  aria-label={`Show photo ${i + 1} of ${product.name}`}
+                  aria-current={i === activeImage}
+                  className={`shrink-0 w-20 h-16 sm:w-24 sm:h-20 bg-white border p-1.5 transition-colors ${
+                    i === activeImage ? 'border-accent' : 'border-muted/15 hover:border-accent/30'
+                  }`}
+                >
+                  <img src={src} alt="" className="w-full h-full object-contain" />
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* BELOW: Product Details, Specifications and Enquiry Form */}
           <div className="py-10 px-4 sm:px-6 lg:px-8 bg-white relative">
@@ -158,10 +219,15 @@ export default function ProductDetail() {
                   >
                     {added ? <><Check className="w-5 h-5" /> Added to Enquiry</> : <><ClipboardList className="w-5 h-5 group-hover/add:rotate-12 transition-transform" /> Add to Enquiry</>}
                   </button>
-                  <button className="flex-1 flex items-center justify-center gap-2 py-5 px-6 bg-white border-l border-muted/15 text-primary font-heading font-light text-sm uppercase tracking-[0.2em] hover:bg-muted/10 transition-all group/dl">
-                    <Download className="w-4 h-4 text-accent group-hover/dl:translate-y-0.5 transition-transform" /> 
-                    <span className="hidden sm:inline">Data Sheet</span>
-                  </button>
+                  <a
+                    href={whatsappLink(productEnquiryMessage({ product, quantity, measurements, note, url: window.location.href }))}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 py-5 px-6 bg-white sm:border-l border-t sm:border-t-0 border-muted/15 text-primary font-heading font-light text-sm uppercase tracking-[0.2em] hover:bg-muted/10 hover:text-accent transition-all"
+                  >
+                    <WhatsAppIcon className="w-4 h-4 text-accent" />
+                    <span>WhatsApp</span>
+                  </a>
                 </div>
               </div>
 
@@ -265,8 +331,10 @@ export default function ProductDetail() {
         </div>
 
         {/* ── TECHNICAL DEEP DIVE ───────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 border-b border-muted/15">
+        {(product.features.length > 0 || product.applications.length > 0) && (
+        <div className={`grid grid-cols-1 ${product.features.length > 0 && product.applications.length > 0 ? 'md:grid-cols-2' : ''} border-b border-muted/15`}>
           {/* Features */}
+          {product.features.length > 0 && (
           <div className="py-16 px-8 lg:px-12 border-r border-muted/15 bg-muted/5 group">
             <div className="flex items-center gap-3 mb-8">
               <Shield className="w-6 h-6 text-accent" />
@@ -283,8 +351,10 @@ export default function ProductDetail() {
               ))}
             </div>
           </div>
+          )}
 
           {/* Applications */}
+          {product.applications.length > 0 && (
           <div className="py-16 px-8 lg:px-12">
             <div className="flex items-center gap-3 mb-8">
               <Zap className="w-6 h-6 text-accent" />
@@ -301,7 +371,9 @@ export default function ProductDetail() {
               ))}
             </div>
           </div>
+          )}
         </div>
+        )}
 
         {/* ── RELATED MODULES ───────────────────── */}
         {related.length > 0 && (

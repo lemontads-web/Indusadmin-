@@ -3,6 +3,8 @@ import { Trash2, ShoppingBag, Send, Paperclip, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { useCartStore } from '../store/useCartStore';
 import SectionHeading from '../components/SectionHeading';
+import WhatsAppIcon from '../components/WhatsAppIcon';
+import { whatsappLink, listEnquiryMessage } from '../utils/whatsapp';
 
 const RECIPIENT_EMAIL = 'shashank1341@gmail.com';
 const BASIN_ENDPOINT = 'https://usebasin.com/f/7ada9d583ec3';
@@ -223,6 +225,15 @@ export default function Enquiry() {
                   {loading ? 'Preparing Email...' : 'Send Enquiry'}
                   {!loading && <Send className="w-5 h-5" />}
                 </button>
+                <a
+                  href={whatsappLink(listEnquiryMessage(items))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 w-full bg-white border border-muted/15 text-primary py-3.5 font-heading font-light text-sm uppercase tracking-[0.2em] hover:text-accent hover:border-accent/30 transition-all flex items-center justify-center gap-3"
+                >
+                  <WhatsAppIcon className="w-5 h-5 text-accent" />
+                  Or send this list on WhatsApp
+                </a>
               </div>
             </form>
           </div>

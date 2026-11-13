@@ -4,31 +4,33 @@ import { motion, AnimatePresence } from 'framer-motion';
 import productsData from '../data/products.json';
 import { Filter, X, Grid, Search, Activity } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
+import categories from '../data/categories';
+import { searchProducts } from '../utils/productSearch';
 
-const ALL_CATEGORIES = [...new Set(productsData.map(p => p.categoryLabel))];
-const categoryToSlug = (category) => category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const ALL_CATEGORIES = categories.filter((c) => productsData.some((p) => p.category === c.slug));
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
   const activeCategory = useMemo(() => {
     const categorySlug = searchParams.get('category');
-    return ALL_CATEGORIES.find((category) => categoryToSlug(category) === categorySlug) || '';
+    return ALL_CATEGORIES.some((c) => c.slug === categorySlug) ? categorySlug : '';
   }, [searchParams]);
 
   const setActiveCategory = (category) => {
     const nextParams = new URLSearchParams(searchParams);
     if (category) {
-      nextParams.set('category', categoryToSlug(category));
+      nextParams.set('category', category);
     } else {
       nextParams.delete('category');
     }
     setSearchParams(nextParams);
   };
 
-  const filtered = productsData
-    .filter(p => activeCategory === '' || p.categoryLabel === activeCategory)
-    .filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filtered = searchProducts(
+    productsData.filter(p => activeCategory === '' || p.category === activeCategory),
+    searchQuery
+  );
 
   return (
     <div className="bg-white text-primary font-heading font-light">
@@ -54,7 +56,7 @@ export default function Products() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/60 group-focus-within:text-accent" />
                 <input 
                   type="text" 
-                  placeholder="ID / NAME / SPEC..."
+                  placeholder="e.g. immersion heater, thermocouple..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-white border border-muted/15 pl-10 pr-4 py-3 text-xs font-heading font-light focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all uppercase tracking-widest placeholder:text-primary/50"
@@ -96,8 +98,8 @@ export default function Products() {
                 <span>All Products</span>
                 <span className={`text-[10px] opacity-60 group-hover:opacity-100 ${activeCategory === '' ? 'opacity-100 font-light' : ''}`}>{productsData.length}</span>
               </button>
-              {ALL_CATEGORIES.map(cat => {
-                const count = productsData.filter(p => p.categoryLabel === cat).length;
+              {ALL_CATEGORIES.map(({ slug: cat, label }) => {
+                const count = productsData.filter(p => p.category === cat).length;
                 return (
                   <button
                     key={cat}
@@ -108,7 +110,7 @@ export default function Products() {
                         : 'border-transparent text-primary hover:text-accent hover:bg-muted/5'
                     }`}
                   >
-                    <span className="truncate">{cat}</span>
+                    <span className="truncate">{label}</span>
                     <span className={`text-[10px] opacity-60 group-hover:opacity-100 ${activeCategory === cat ? 'opacity-100 font-light' : ''}`}>{count}</span>
                   </button>
                 );
@@ -134,7 +136,7 @@ export default function Products() {
             >
               ALL
             </button>
-            {ALL_CATEGORIES.map(cat => (
+            {ALL_CATEGORIES.map(({ slug: cat, label }) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
@@ -142,7 +144,7 @@ export default function Products() {
                   activeCategory === cat ? 'bg-accent text-white font-light border-accent' : 'bg-white text-primary hover:text-accent'
                 }`}
               >
-                {cat.split(' ')[0]}
+                {label.split(' ')[0]}
               </button>
             ))}
           </div>
