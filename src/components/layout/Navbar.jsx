@@ -2,20 +2,21 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useCartStore } from '../../store/useCartStore';
 import { ClipboardList, Menu, X, ChevronDown } from 'lucide-react';
-import productsData from '../../data/products.json';
-import allCategories from '../../data/categories';
+import { useCatalogue } from '../../data/catalogueContext';
 import finalLogo from '../../assets/Final logo.png';
 
-const categories = allCategories.filter((c) => productsData.some((p) => p.category === c.slug));
 
-const Navbar = () => {
+const Navbar = ({ strip = null }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const location = useLocation();
   const totalCount = useCartStore((state) => state.getTotalCount());
+  const { products, categories: allCategories } = useCatalogue();
+  const categories = allCategories.filter((c) => products.some((p) => p.category === c.slug));
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-muted/15">
+      {strip}
       {/* Top accent line */}
       <div className="h-[3px] bg-accent w-full" />
 

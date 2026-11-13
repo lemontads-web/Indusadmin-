@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Mail } from 'lucide-react';
-import productsData from '../../data/products.json';
-import allCategories from '../../data/categories';
+import { useCatalogue } from '../../data/catalogueContext';
 import finalLogo from '../../assets/Final logo.png';
 
-const footerCategories = allCategories.filter((c) => productsData.some((p) => p.category === c.slug));
 
 const Footer = () => {
+  const { products, categories } = useCatalogue();
+  const footerCategories = categories.filter((c) => products.some((p) => p.category === c.slug));
   return (
     <footer className="bg-white text-primary border-t-4 border-accent font-heading font-light">
 

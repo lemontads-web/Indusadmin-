@@ -1,8 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { getCategory } from '../data/categories';
+import { useCatalogue } from '../data/catalogueContext';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import productsData from '../data/products.json';
 import { useCartStore } from '../store/useCartStore';
 import { ClipboardList, Check, Zap, Shield, ChevronRight, Plus, Minus, UploadCloud, Paperclip } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
@@ -12,6 +11,7 @@ import { whatsappLink, productEnquiryMessage } from '../utils/whatsapp';
 
 export default function ProductDetail() {
   const { productSlug, categorySlug } = useParams();
+  const { products: productsData, categories, loaded } = useCatalogue();
   const product = productsData.find(p => p.slug === productSlug);
   const addItem = useCartStore(state => state.addItem);
   const [added, setAdded] = useState(false);
@@ -31,7 +31,7 @@ export default function ProductDetail() {
   useEffect(() => {
     if (!product) return undefined;
     const previousTitle = document.title;
-    document.title = `${product.name} | ${product.categoryLabel} | Indus Heaters`;
+    document.title = product.seoTitle || `${product.name} | ${product.categoryLabel} | Indus Heaters`;
     const setMeta = (name, content) => {
       let tag = document.querySelector(`meta[name="${name}"]`);
       if (!tag) {
@@ -43,7 +43,7 @@ export default function ProductDetail() {
       tag.setAttribute('content', content);
       return () => (previous === null ? tag.remove() : tag.setAttribute('content', previous));
     };
-    const restoreDescription = setMeta('description', `${product.name} by Indus Heaters, Chennai. ${product.shortDescription}`);
+    const restoreDescription = setMeta('description', product.seoDescription || `${product.name} by Indus Heaters, Chennai. ${product.shortDescription}`);
     const restoreKeywords = setMeta('keywords', [product.name, product.categoryLabel, ...(product.keywords || [])].join(', '));
     return () => {
       document.title = previousTitle;
@@ -52,7 +52,20 @@ export default function ProductDetail() {
     };
   }, [product]);
 
-  if (!product && getCategory(categorySlug)) {
+  if (!product && !loaded) {
+    // A product added in the admin panel may not be in the built-in data yet — wait for live data
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center bg-white" role="status" aria-label="Loading product">
+        <div className="flex gap-2">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="w-2 h-2 bg-accent animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!product && categories.some((c) => c.slug === categorySlug)) {
     // Old product address (e.g. before products were split) → show its category instead
     return <Navigate to={`/products?category=${categorySlug}`} replace />;
   }

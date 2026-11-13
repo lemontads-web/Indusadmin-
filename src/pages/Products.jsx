@@ -1,21 +1,23 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import productsData from '../data/products.json';
 import { Filter, X, Grid, Search, Activity } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
-import categories from '../data/categories';
+import { useCatalogue } from '../data/catalogueContext';
 import { searchProducts } from '../utils/productSearch';
-
-const ALL_CATEGORIES = categories.filter((c) => productsData.some((p) => p.category === c.slug));
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
+  const { products: productsData, categories } = useCatalogue();
+  const ALL_CATEGORIES = useMemo(
+    () => categories.filter((c) => productsData.some((p) => p.category === c.slug)),
+    [categories, productsData]
+  );
   const activeCategory = useMemo(() => {
     const categorySlug = searchParams.get('category');
     return ALL_CATEGORIES.some((c) => c.slug === categorySlug) ? categorySlug : '';
-  }, [searchParams]);
+  }, [searchParams, ALL_CATEGORIES]);
 
   const setActiveCategory = (category) => {
     const nextParams = new URLSearchParams(searchParams);

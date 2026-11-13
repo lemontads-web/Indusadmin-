@@ -1,5 +1,14 @@
 # Changes Document
 
+## Session Summary: Admin Panel Phase 3 — Website Reads Live Data
+
+- **Live catalogue** (`src/data/catalogueApi.js`, `CatalogueProvider.jsx`, `catalogueContext.js`): one request set loads categories, products, photos, related links, live banners and public settings from Supabase. Pages (Home, Products, Product detail, Navbar, Footer) read it through `useCatalogue()`.
+- **Never blank, never broken**: the built-in `products.json` (or the visitor's last live copy) shows instantly; live data swaps in when it arrives. If Supabase is slow (8 s timeout), paused or unreachable, or returns an empty catalogue, the site uses the built-in data with photos from this website.
+- Product pages added only in Supabase wait for live data instead of showing "not found"; SEO title/description from Supabase are used when set.
+- WhatsApp number now comes from Supabase `site_settings.whatsapp_number` (default kept in `src/utils/whatsapp.js`).
+- **Banners**: `AnnouncementStrip` (one-line strip above the menu, brand red/grey/white, closable and remembered) and `HeroBannerSlide` (offer/festival slide leading the Home slideshow, 6 s, caption kept above the fold). Both appear only when a banner is published and within its dates.
+- Tested in the browser: live data, banners on phone and desktop, closing the strip, slideshow hand-off, and a simulated Supabase outage.
+
 ## Session Summary: Admin Panel Phase 2 — Catalogue Imported into Supabase
 
 - `scripts/import-to-supabase.mjs` (`npm run import:supabase`, `-- --dry-run` to preview): signs in as the owner (password typed, hidden, never stored), uploads photos to the `media` bucket with size, SHA-256 hash and alt text, then saves categories, products, photo links and related links. Re-runnable: updates instead of duplicating. Validates data first (missing files, unknown categories, duplicate photos, self-related products).

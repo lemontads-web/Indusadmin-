@@ -7,9 +7,10 @@ import ourApproachImg from '../assets/products/5.png';
 
 
 import SectionHeading from '../components/SectionHeading';
-import categories from '../data/categories';
+import { useCatalogue } from '../data/catalogueContext';
 import StatsBar from '../components/StatsBar';
 import HeroButton from '../components/HeroButton';
+import HeroBannerSlide from '../components/HeroBannerSlide';
 
 const heroImageModules = import.meta.glob('/src/image-animation/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' });
 const heroImages = Object.entries(heroImageModules)
@@ -40,22 +41,31 @@ const industries = [
 ];
 
 export default function Home() {
+  const { categories, banners } = useCatalogue();
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
+  // Live offer/festival banners lead the slideshow, then the product photos
+  const heroBanners = banners.filter((b) => b.placement === 'home_hero');
+  const slides = [
+    ...heroBanners.map((banner) => ({ key: `banner-${banner.id}`, banner })),
+    ...heroImages.map((src) => ({ key: src, src })),
+  ];
+  const slideCount = slides.length;
+  const activeIndex = currentHeroIndex % Math.max(slideCount, 1);
+  const activeIsBanner = Boolean(slides[activeIndex]?.banner);
+
   useEffect(() => {
-    if (heroImages.length <= 1) return;
+    if (slideCount <= 1) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches) return;
+    // Banner slides stay a little longer so the text can be read
+    // (browsers pause timers in hidden tabs, so this also rests when nobody is looking)
+    const timer = setTimeout(() => {
+      setCurrentHeroIndex((prev) => (prev + 1) % slideCount);
+    }, activeIsBanner ? 6000 : 3500);
 
-    const interval = setInterval(() => {
-      if (document.visibilityState === 'visible') {
-        setCurrentHeroIndex((prev) => (prev + 1) % heroImages.length);
-      }
-    }, 3500);
-
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [currentHeroIndex, slideCount, activeIsBanner]);
 
   return (
     <div className="bg-white text-primary font-heading font-light">
@@ -66,16 +76,20 @@ export default function Home() {
           
           {/* Mobile: Top (order-1), Desktop: Right Panel — flush to top, no gap */}
           <div className="order-1 md:order-2 w-full md:w-1/2 md:absolute md:top-0 md:bottom-0 md:right-0 h-64 sm:h-80 md:h-full relative overflow-hidden bg-white">
-            {heroImages.map((imgSrc, idx) => (
-              <img
-                key={imgSrc}
-                src={imgSrc}
-                alt={`Indus Heaters product asset ${idx + 1}`}
-                loading={idx === 0 ? 'eager' : 'lazy'}
-                className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 ease-in-out ${
-                  idx === currentHeroIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                }`}
-              />
+            {slides.map((slide, idx) => (
+              slide.banner ? (
+                <HeroBannerSlide key={slide.key} banner={slide.banner} active={idx === activeIndex} />
+              ) : (
+                <img
+                  key={slide.key}
+                  src={slide.src}
+                  alt={`Indus Heaters product asset ${idx + 1 - heroBanners.length}`}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 ease-in-out ${
+                    idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                  }`}
+                />
+              )
             ))}
           </div>
 

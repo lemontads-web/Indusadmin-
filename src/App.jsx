@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import MainLayout from './components/layout/MainLayout';
 import ScrollToTop from './components/ScrollToTop';
+import CatalogueProvider from './data/CatalogueProvider';
 
 const Home = lazy(() => import('./pages/Home'));
 const Products = lazy(() => import('./pages/Products'));
@@ -23,6 +24,7 @@ const Loader = () => (
 
 function App() {
   return (
+    <CatalogueProvider>
     <Router>
       <ScrollToTop />
       <MainLayout>
@@ -46,6 +48,7 @@ function App() {
         </Suspense>
       </MainLayout>
     </Router>
+    </CatalogueProvider>
   );
 }
 

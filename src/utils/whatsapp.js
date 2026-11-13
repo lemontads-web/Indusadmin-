@@ -1,10 +1,15 @@
-// WhatsApp business number (India +91). Change here to update every button.
-export const WHATSAPP_NUMBER = '917338970698';
-export const WHATSAPP_DISPLAY = '+91 73389 70698';
+// WhatsApp business number (India +91). Default below; the live value comes
+// from Supabase site_settings.whatsapp_number once the catalogue loads.
+let whatsappNumber = '917338970698';
+
+export const setWhatsAppNumber = (number) => {
+  const digits = String(number || '').replace(/\D/g, '');
+  if (digits.length >= 10) whatsappNumber = digits;
+};
 
 // Opens a WhatsApp chat with the business number and a pre-filled message.
 export const whatsappLink = (message = '') =>
-  `https://wa.me/${WHATSAPP_NUMBER}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
+  `https://wa.me/${whatsappNumber}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
 
 const formatMeasurements = (measurements = {}) =>
   Object.entries(measurements)
