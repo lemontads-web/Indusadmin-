@@ -1,5 +1,14 @@
 # Changes Document
 
+## Session Summary: Hosted on Vercel
+
+- Live at **https://indus-heaters.vercel.app** (Vercel project `indus-heaters`, team "sha", Hobby plan).
+- `vercel.json`: Vite build to `dist`, every address served by the app (refresh-safe), long caching for code and photos, `X-Robots-Tag: noindex` on /admin.
+- `.vercelignore` keeps `.env.local` (and build leftovers) off Vercel; `.vercel/` link folder git-ignored.
+- Supabase public URL and key added as Vercel environment variables (production, preview, development).
+- Checked live: home, products (37 from Supabase, no broken photos), direct product URLs, admin sign-in, robots.txt; design preview disabled in production.
+- Deploy again: `npx vercel@65.15.0 deploy --prod --scope sha-d5ae` (automatic deploys on GitHub push need a GitHub login connection in Vercel).
+
 ## Session Summary: Admin Panel Audit Fixes
 
 Bugs:
